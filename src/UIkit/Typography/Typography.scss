@@ -1,0 +1,49 @@
+@import "../../assets/styles/main";
+
+//@import "src/assets/styles/typography/typography";
+//
+//.typography {
+//  color: color(color-text-primary);
+//
+//  @each $variant, $styles in $typography {
+//    &--#{$variant} {
+//      @include typography(map-get($styles, "fs"), map-get($styles, "fw"), map-get($styles, "ln"));
+//    }
+//  }
+//}
+
+.typography {
+
+  &--display {
+    font-family: 'NT Somic', sans-serif;
+    @include text-display;
+  }
+  &--headline-h1 {
+    font-family: 'NT Somic', sans-serif;
+    @include headline-h1;
+  }
+  &--headline-h2 {
+    font-family: 'NT Somic', sans-serif;
+    @include headline-h2;
+  }
+  &--title-h1 {
+    font-family: 'NT Somic', sans-serif;
+    @include title-h1;
+  }
+  &--title-h2 {
+    font-family: 'NT Somic', sans-serif;
+    @include title-h1;
+  }
+  &--title-h3 {
+    font-family: 'NT Somic', sans-serif;
+    @include title-h1;
+  }
+  &--text-16{
+    font-family: 'Lato', sans-serif;
+    @include title-h1;
+  }
+  &--text-14 {
+    font-family: 'Lato', sans-serif;
+    @include title-h1;
+  }
+}
