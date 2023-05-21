@@ -1,0 +1,51 @@
+export type Colors = {
+  "color-primary": string;
+  "color-secondary": string;
+  "color-tertiary": string;
+  "color-text-primary": string;
+  "color-text-secondary": string;
+  "color-text-tertiary": string;
+  "color-text-success": string;
+  "color-text-warning": string;
+  "color-text-error": string;
+  "color-text-invert-primary": string;
+  "color-text-invert-secondary": string;
+  "color-text-invert-tertiary": string;
+  "color-icon-primary": string;
+  "color-icon-secondary": string;
+  "color-icon-tertiary": string;
+  "color-icon-success": string;
+  "color-icon-error": string;
+  "color-icon-invert-primary": string;
+  "color-icon-invert-secondary": string;
+  "color-icon-invert-tertiary": string;
+  "color-button-primary-default": string;
+  "color-button-primary-hover": string;
+  "color-button-primary-focus": string;
+  "color-button-primary-disable": string;
+  "color-button-secondary-default": string;
+  "color-button-secondary-hover": string;
+  "color-button-secondary-focus": string;
+  "color-button-secondary-disable": string;
+  "color-button-invert-default": string;
+  "color-button-invert-hover": string;
+  "color-button-invert-focus": string;
+  "color-button-invert-disable": string;
+  "color-background-primary": string;
+  "color-background-secondary": string;
+  "color-border-primary": string;
+  "color-border-secondary": string;
+  "color-border-success": string;
+  "color-border-warning": string;
+  "color-border-error": string;
+  "color-control-active": string;
+  "color-control-active-disable": string;
+  "color-control-default": string;
+  "color-control-default-disable": string;
+};
+
+export type ColorNames = keyof Colors;
+
+declare const styles: Colors;
+
+export default styles;

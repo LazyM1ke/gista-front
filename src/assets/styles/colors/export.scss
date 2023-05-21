@@ -1,0 +1,8 @@
+@import "colors";
+
+//? Транспортировка цветов в машинопись ʕʘ‿ಠʔ
+:export {
+  @each $name, $color in $colors {
+    #{$name}: $color;
+  }
+}
