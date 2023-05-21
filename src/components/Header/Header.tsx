@@ -1,3 +1,4 @@
+import Button from "../../UIkit/Button";
 import Logo from "../../UIkit/Logo/Logo";
 import Typography from "../../UIkit/Typography";
 import "./Header.scss";
@@ -13,8 +14,10 @@ const Header = () => {
         </Typography>
       </div>
       <div className="header__btns">
-        <button>test</button>
-        <button>test</button>
+        <Button type="primary">Зарегистрироваться</Button>
+        <Button type="secondary" disabled>
+          Войти
+        </Button>
       </div>
     </header>
   );

@@ -1,4 +1,3 @@
-@import "./button.scss";
 @import "./typography.scss";
 
 @mixin width($width) {
@@ -25,6 +24,12 @@
   @if $border-widths != none {
     border-width: $border-widths;
   }
+}
+@mixin button($width ,$bg-color) {
+  @include width($width);
+  height: 40px;
+  background-color: $bg-color;
+  @include border($border-radius: 8px);
 }
 
 @mixin flexible($ai: flex-start, $jc: flex-start, $fd: row, $fw: nowrap, $gap: 0) {

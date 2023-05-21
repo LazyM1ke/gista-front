@@ -1,0 +1,80 @@
+@import "src/assets/styles/main";
+
+.button {
+  $parent: &;
+  @include flexible(center, center, $gap: 4px);
+  padding: 8px 16px;
+
+  // Button Types
+  &--primary {
+    height: 40px;
+    background-color: #007FFF;
+    @include border($border-radius: 8px);
+
+    #{$parent}__text {
+      color: #FFFFFF;
+    }
+  }
+
+  &--secondary {
+    height: 40px;
+    background-color: #D4E9FF;
+    @include border($border-radius: 8px);
+
+    #{$parent}__text {
+      color: #007FFF;
+    }
+  }
+
+  &--borderless {
+    height: 40px;
+    background-color: transparent;
+    @include border($border-radius: 8px);
+
+    #{$parent}__text {
+      color: #007FFF;
+    }
+  }
+
+  &--invert {
+    height: 40px;
+    background-color: #D4E9FF;
+    @include border($border-radius: 8px);
+
+    #{$parent}__text {
+      color: #007FFF;
+    }
+  }
+
+  // Button States
+
+  &--primary:active {
+    background-color: #006DDB;
+    transition: background-color .4s ease-out;
+  }
+
+  &--secondary:active {
+    background-color: #ABD5FF;
+    transition: background-color .4s ease-out;
+
+    #{$parent}__text {
+      color: #007FFF;
+    }
+  }
+
+  &--primary--disabled {
+    background-color: #EBEBEB;
+
+    #{$parent}__text {
+      color: #A1A1A1;
+    }
+  }
+  &--secondary--disabled {
+    background-color: #EBEBEB;
+
+    #{$parent}__text {
+      color: #A1A1A1;
+    }
+  }
+
+}

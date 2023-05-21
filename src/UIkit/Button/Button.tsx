@@ -13,9 +13,8 @@ function Button({
 
   disabled = false,
   fullWidth = true,
-  iconRight = false,
-
-  icon,
+  leftIcon,
+  rightIcon,
 
   onClick,
 }: ButtonProps) {
@@ -25,7 +24,6 @@ function Button({
     `button--${size}`,
     {
       "button--disabled": disabled,
-      "button-icon-right": iconRight,
       "button-full-width": fullWidth,
     },
     className
@@ -47,9 +45,11 @@ function Button({
       disabled={disabled}
       onClick={onClick}
     >
-      {icon}
+      {leftIcon}
 
       {content}
+
+      {rightIcon}
     </button>
   );
 }
