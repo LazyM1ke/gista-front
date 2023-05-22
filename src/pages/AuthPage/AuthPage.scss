@@ -5,11 +5,23 @@
   height: 100vh;
   background: url("src/assets/images/Gradient.png") no-repeat ;
   background-size: cover;
+  &__content {
+    @include flexible($fd: row);
+  }
+  &__img {
+    margin-right: 350px;
+  }
+
+
   &__form {
     @include flexible($fd: column, $gap: 32px);
+    margin-top: 50px;
     padding: 32px 40px;
     background-color: #fff;
     border-radius: 16px;
+    &__input {
+
+    }
     &__title {
       margin: 0 auto;
       font-family: NT Somic-Bold, sans-serif;
@@ -17,6 +29,7 @@
 
     &__inputs {
       @include flexible($fd: column, $gap: 16px);
+      width: 100%;
     }
     &__submit {
       @include flexible($fd: column, $gap: 24px);

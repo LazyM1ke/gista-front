@@ -9,7 +9,7 @@ interface IconProps {
   width?: number;
   height?: number;
   viewBox?: number;
-  color?: ColorNames;
+  color?: string;
 }
 
 export default IconProps;

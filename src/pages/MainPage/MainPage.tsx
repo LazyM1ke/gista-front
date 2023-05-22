@@ -1,6 +1,7 @@
 import Icon from "../../UIkit/Icon";
 import Typography from "../../UIkit/Typography";
 import GistaItem from "../../components/GistaItem/GistaItem";
+import Header from "../../components/Header/Header";
 import "./MainPage.scss";
 import React from "react";
 

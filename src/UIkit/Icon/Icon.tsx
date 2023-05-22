@@ -18,7 +18,7 @@ const Icon = ({
   width = 0,
   height = 0,
   viewBox = 24,
-  color = "color-icon-primary",
+  color = "#787878",
 }: IconProps) => {
   const [translatePathY, setTranslatePathY] = useState<number>(0);
   const [translatePathX, setTranslatePathX] = useState<number>(0);
@@ -71,13 +71,13 @@ const Icon = ({
       xmlns="http://www.w3.org/2000/svg"
       className={IconClassName}
       style={customSize}
-      color={getColorAsCSSVariable(color)}
+      color={color}
       viewBox={`${-translatePathX} ${-translatePathY} ${viewBox} ${viewBox}`}
       fill="none"
     >
       {iconsPaths[iconName]}
     </svg>
   );
-}
+};
 
 export default Icon;

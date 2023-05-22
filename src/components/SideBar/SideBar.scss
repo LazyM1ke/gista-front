@@ -8,9 +8,17 @@
   border-right: 1px solid #DEDEDE;
   &__tabs {
     @include flexible($fd: column, $gap: 16px);
+    width: 100%;
+
     &__item {
       @include flexible($fd: row, $gap: 16px);
       padding: 4px 16px;
+      cursor: pointer;
+      width: 100%;
+
+      &.active {
+        background: linear-gradient(270deg, rgba(0, 127, 255, 0.04) 0%, rgba(0, 127, 255, 0) 100%);
+      }
     }
   }
 
