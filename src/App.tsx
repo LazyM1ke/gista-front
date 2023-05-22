@@ -14,6 +14,7 @@ const App = () => {
         <Button type="secondary">Войти</Button>
         <Icon iconName="profileCircle" />
       </Header>
+        {/*<AuthPage/>*/}
       <div className="app__content">
         <SideBar />
         <MainPage />

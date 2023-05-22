@@ -1,10 +1,13 @@
 @import "src/assets/styles/main";
 .main-page {
+  @include flexible($fd: column);
   padding: 32px;
+  width: 100%;
 
   &__collapse-title {
+    @include flexible($fd: row, $ai: center, $jc: space-between);
     padding: 4px 16px;
-    @include flexible($fd: row, $ai: center, $jc: space-between)
+    width: 100%;
   }
   &__content {
     display: grid;

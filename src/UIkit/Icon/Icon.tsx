@@ -11,7 +11,7 @@ interface CustomSize {
   maxHeight: string;
 }
 
-function Icon({
+const Icon = ({
   className,
   iconName = "profileCircle",
   size = 24,
@@ -19,7 +19,7 @@ function Icon({
   height = 0,
   viewBox = 24,
   color = "color-icon-primary",
-}: IconProps) {
+}: IconProps) => {
   const [translatePathY, setTranslatePathY] = useState<number>(0);
   const [translatePathX, setTranslatePathX] = useState<number>(0);
 

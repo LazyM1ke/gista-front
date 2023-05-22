@@ -1,0 +1,4 @@
+@import "src/assets/styles/main";
+.text-input {
+  @include flexible($fd: column);
+}
