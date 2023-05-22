@@ -1,0 +1,13 @@
+@import "src/assets/styles/main";
+
+.gista-item {
+  @include flexible($fd: row, $ai: center);
+  width: 564px;
+  border: 1px solid #DEDEDE;
+  border-radius: 8px;
+
+  &__content {
+    @include flexible($fd: row, $gap: 14px, $ai: center);
+    padding: 16px 24px 16px 16px;
+  }
+}

@@ -1,10 +1,10 @@
-import Button from "../../UIkit/Button";
 import Logo from "../../UIkit/Logo/Logo";
 import Typography from "../../UIkit/Typography";
 import "./Header.scss";
+import HeaderProps from "./HeaderProps.types";
 import React from "react";
 
-const Header = () => {
+const Header = ({ children }: HeaderProps) => {
   return (
     <header className="header">
       <div className="header__logo">
@@ -13,12 +13,7 @@ const Header = () => {
           Сдать Гисту
         </Typography>
       </div>
-      <div className="header__btns">
-        <Button type="primary">Зарегистрироваться</Button>
-        <Button type="secondary" disabled>
-          Войти
-        </Button>
-      </div>
+      <div className="header__btns">{children}</div>
     </header>
   );
 };

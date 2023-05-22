@@ -1,0 +1,25 @@
+@import "src/assets/styles/main";
+
+.sidebar {
+  @include flexible($fd: column, $jc: space-between);
+  padding: 24px 0 12px 12px;
+  width: 224px;
+  height: 90vh;
+  border-right: 1px solid #DEDEDE;
+  &__tabs {
+    @include flexible($fd: column, $gap: 16px);
+    &__item {
+      @include flexible($fd: row, $gap: 16px);
+      padding: 4px 16px;
+    }
+  }
+
+  &__settings {
+    @include flexible($fd: column, $gap: 16px);
+    &__item {
+      @include flexible($fd: row, $gap: 16px);
+      padding: 4px 16px;
+    }
+  }
+
+}

@@ -4,7 +4,7 @@ import ButtonProps from "./ButtonProps.types";
 import classnames from "classnames";
 import React from "react";
 
-function Button({
+const Button = ({
   className,
   children = "Кпопочка",
 
@@ -12,12 +12,12 @@ function Button({
   size = "medium",
 
   disabled = false,
-  fullWidth = true,
+  fullWidth = false,
   leftIcon,
   rightIcon,
 
   onClick,
-}: ButtonProps) {
+}: ButtonProps) => {
   const buttonClassName = classnames(
     "button",
     `button--${type}`,
@@ -52,6 +52,6 @@ function Button({
       {rightIcon}
     </button>
   );
-}
+};
 
 export default Button;

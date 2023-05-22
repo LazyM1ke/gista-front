@@ -1,0 +1,16 @@
+@import "src/assets/styles/main";
+.main-page {
+  padding: 32px;
+
+  &__collapse-title {
+    padding: 4px 16px;
+    @include flexible($fd: row, $ai: center, $jc: space-between)
+  }
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    overflow: hidden;
+  }
+
+}

@@ -1,0 +1,34 @@
+@import "../../assets/styles/main";
+
+.auth-page {
+  @include flexible($fd: column, $gap: 16px);
+  height: 100vh;
+  background: url("src/assets/images/Gradient.png") no-repeat ;
+  background-size: cover;
+  &__form {
+    @include flexible($fd: column, $gap: 32px);
+    padding: 32px 40px;
+    background-color: #fff;
+    border-radius: 16px;
+    &__title {
+      margin: 0 auto;
+      font-family: NT Somic-Bold, sans-serif;
+    }
+
+    &__inputs {
+      @include flexible($fd: column, $gap: 16px);
+    }
+    &__submit {
+      @include flexible($fd: column, $gap: 24px);
+    }
+    &__register {
+      @include flexible($fd: row, $gap: 32px);
+    }
+  }
+
+  &__title {
+    margin: 54px 0 0 34px;
+  }
+
+
+}

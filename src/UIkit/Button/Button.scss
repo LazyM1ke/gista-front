@@ -5,6 +5,11 @@
   @include flexible(center, center, $gap: 4px);
   padding: 8px 16px;
 
+  &-full-width {
+    @include fixedWidth(100%, $min-size: 0);
+    padding: 0;
+  }
+
   // Button Types
   &--primary {
     height: 40px;

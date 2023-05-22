@@ -1,9 +1,10 @@
+import { getColorAsCSSVariable } from "../../utils/colorUtils";
 import "./Typography.scss";
 import TypographyProps from "./TypographyProps.types";
 import classnames from "classnames";
 
 function Typography({
-  variant = "display",
+  variant = "title-h3",
   color,
   className,
   children,

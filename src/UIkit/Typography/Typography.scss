@@ -32,18 +32,18 @@
   }
   &--title-h2 {
     font-family: 'NT Somic', sans-serif;
-    @include title-h1;
+    @include title-h2;
   }
   &--title-h3 {
     font-family: 'NT Somic', sans-serif;
-    @include title-h1;
+    @include title-h3;
   }
   &--text-16{
     font-family: 'Lato', sans-serif;
-    @include title-h1;
+    @include text-16;
   }
   &--text-14 {
     font-family: 'Lato', sans-serif;
-    @include title-h1;
+    @include text-14;
   }
 }
