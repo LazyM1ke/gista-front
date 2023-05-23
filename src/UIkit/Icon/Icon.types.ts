@@ -10,6 +10,7 @@ interface IconProps {
   height?: number;
   viewBox?: number;
   color?: string;
+  fill?: string;
 }
 
 export default IconProps;

@@ -23,10 +23,12 @@
   }
 
   &__settings {
+    width: 100%;
     @include flexible($fd: column, $gap: 16px);
     &__item {
       @include flexible($fd: row, $gap: 16px);
       padding: 4px 16px;
+      width: 100%;
     }
   }
 

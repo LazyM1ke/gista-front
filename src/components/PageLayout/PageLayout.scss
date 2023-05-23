@@ -1,0 +1,9 @@
+@import "src/assets/styles/main";
+
+.page-layout {
+  @include flexible($fd: column);
+  &__content {
+    @include flexible($fd: row);
+    width: 100%;
+  }
+}

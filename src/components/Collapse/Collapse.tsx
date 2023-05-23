@@ -12,7 +12,9 @@ const Collapse = ({ title, children, className }: CollapseProps) => {
   return (
     <div className={CollapseClassName}>
       <div className="collapse__wrapper" onClick={() => setIsOpened(!isOpened)}>
-        <Typography variant="headline-h1">{title}</Typography>
+        <Typography className="collapse__title" variant="headline-h1">
+          {title}
+        </Typography>
         <Icon color="#000000" iconName={isOpened ? "arrowUp" : "arrowDown"} />
       </div>
       <div className="collapse__content">{isOpened && children}</div>

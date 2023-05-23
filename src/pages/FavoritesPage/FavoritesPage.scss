@@ -1,19 +1,13 @@
 @import "src/assets/styles/main";
-
-.collapse {
+.favorites {
   @include flexible($fd: column);
-  width: 100%;
+  padding: 0 32px;
   &__title {
+    margin-top: 36px;
     font-family: 'NT Somic-Bold', sans-serif;
   }
-
-  &__wrapper {
-    @include flexible($fd: row, $ai: center, $jc: space-between);
-    padding: 4px 16px;
-    width: 100%;
-    cursor: pointer;
-  }
-  &__content {
+  &__items {
+    margin-top: 28px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 24px;

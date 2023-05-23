@@ -5,7 +5,7 @@ import Header from "./components/Header/Header";
 import SideBar from "./components/SideBar/SideBar";
 import AddGistaPage from "./pages/AddGistaPage/AddGistaPage";
 import AuthPage from "./pages/AuthPage/AuthPage";
-import EditPage from "./pages/CurriculumEditPage/EditPage";
+import EditPage from "./pages/EditPage/EditPage";
 import MainPage from "./pages/MainPage/MainPage";
 import React from "react";
 
@@ -18,8 +18,8 @@ const App = () => {
       {/*<AuthPage />*/}
       <div className="app__content">
         <SideBar />
-        <AddGistaPage />
-        {/*<EditPage />*/}
+        {/*<AddGistaPage />*/}
+        <EditPage />
         {/*<MainPage />*/}
       </div>
     </div>

@@ -19,6 +19,7 @@ const Icon = ({
   height = 0,
   viewBox = 24,
   color = "#787878",
+  fill = "none",
 }: IconProps) => {
   const [translatePathY, setTranslatePathY] = useState<number>(0);
   const [translatePathX, setTranslatePathX] = useState<number>(0);
@@ -73,7 +74,7 @@ const Icon = ({
       style={customSize}
       color={color}
       viewBox={`${-translatePathX} ${-translatePathY} ${viewBox} ${viewBox}`}
-      fill="none"
+      fill={fill}
     >
       {iconsPaths[iconName]}
     </svg>

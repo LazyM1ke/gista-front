@@ -2,13 +2,14 @@ import Icon from "../../UIkit/Icon";
 import { IconNameTypes } from "../../UIkit/Icon/IconPaths";
 import Typography from "../../UIkit/Typography";
 import "./SideBar.scss";
-import classnames from "classnames";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 type IMenuItem = {
   id: number;
   title: string;
   iconName: IconNameTypes;
+  to: string;
 };
 
 const menuItems: IMenuItem[] = [
@@ -16,21 +17,25 @@ const menuItems: IMenuItem[] = [
     id: 1,
     title: "Главная",
     iconName: "keyboardOpen",
+    to: "main",
   },
   {
     id: 2,
     title: "Подписка",
     iconName: "huobitoken",
+    to: "main",
   },
   {
     id: 3,
     title: "Аккаунт",
     iconName: "user",
+    to: "main",
   },
   {
     id: 4,
     title: "Избранное",
     iconName: "star",
+    to: "favorites",
   },
 ];
 
@@ -39,15 +44,18 @@ const settingsItems: IMenuItem[] = [
     id: 5,
     title: "Учебный план",
     iconName: "book",
+    to: "edit",
   },
   {
     id: 6,
     title: "Настройки",
     iconName: "setting",
+    to: "main",
   },
 ];
 
 const SideBar = () => {
+  const navigate = useNavigate();
   const [active, setActive] = useState<number>(1);
 
   return (
@@ -61,7 +69,10 @@ const SideBar = () => {
                 ? "sidebar__tabs__item active"
                 : "sidebar__tabs__item"
             }
-            onClick={() => setActive(item.id)}
+            onClick={() => {
+              setActive(item.id);
+              navigate(item.to);
+            }}
           >
             <Icon
               color={active === item.id ? "#007FFF" : "#787878"}
@@ -83,7 +94,10 @@ const SideBar = () => {
                 ? "sidebar__tabs__item active"
                 : "sidebar__tabs__item"
             }
-            onClick={() => setActive(item.id)}
+            onClick={() => {
+              setActive(item.id);
+              navigate(item.to);
+            }}
           >
             <Icon
               color={active === item.id ? "#007FFF" : "#787878"}
