@@ -43,7 +43,7 @@
 
   &--invert {
     height: 40px;
-    background-color: #D4E9FF;
+    background-color: #FFFFFF;
     @include border($border-radius: 8px);
 
     #{$parent}__text {

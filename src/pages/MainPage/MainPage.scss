@@ -4,16 +4,5 @@
   padding: 32px;
   width: 100%;
 
-  &__collapse-title {
-    @include flexible($fd: row, $ai: center, $jc: space-between);
-    padding: 4px 16px;
-    width: 100%;
-  }
-  &__content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    overflow: hidden;
-  }
 
 }

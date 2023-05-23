@@ -1,0 +1,8 @@
+@import "src/assets/styles/main";
+
+.toolbar {
+  @include flexible($fd: column, $gap: 16px);
+  padding: 8px 4px;
+  border: 1px solid #DEDEDE;
+  border-radius: 8px;
+}

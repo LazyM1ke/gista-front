@@ -1,0 +1,30 @@
+@import "src/assets/styles/main";
+
+.add-gista-page {
+  @include flexible($fd: column);
+  padding: 16px 32px;
+  width: 100%;
+  &__header {
+    @include flexible($fd: row, $jc: space-between, $ai: center);
+    width: 100%;
+  }
+  &__content {
+    margin-top: 32px;
+    @include flexible($fd: row, $gap: 20px);
+    width: 100%;
+  }
+  &__upload{
+    width: 100%;
+    &__content {
+      @include flexible($fd: column, $gap: 20px, $jc: center, $ai: center);
+      border-radius: 8px;
+      padding: 219px 0;
+      width: 100%;
+      background-color: #F2F2F2;
+    }
+  }
+  &__layers {
+    margin-top: 24px;
+    @include flexible($fd: row, $gap: 16px, $ai: center);
+  }
+}

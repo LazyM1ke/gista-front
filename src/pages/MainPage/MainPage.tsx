@@ -1,23 +1,23 @@
-import Icon from "../../UIkit/Icon";
-import Typography from "../../UIkit/Typography";
+import Collapse from "../../components/Collapse/Collapse";
 import GistaItem from "../../components/GistaItem/GistaItem";
-import Header from "../../components/Header/Header";
 import "./MainPage.scss";
 import React from "react";
 
 const MainPage = () => {
   return (
     <div className="main-page">
-      <div className="main-page__collapse-title">
-        <Typography variant="headline-h1">Общая Гистология</Typography>
-        <Icon iconName="arrowUp" />
-      </div>
-      <div className="main-page__content">
+      <Collapse title="Общая гистология">
         <GistaItem />
         <GistaItem />
         <GistaItem />
         <GistaItem />
-      </div>
+      </Collapse>
+      <Collapse title="Частная гистология">
+        <GistaItem />
+        <GistaItem />
+        <GistaItem />
+        <GistaItem />
+      </Collapse>
     </div>
   );
 };

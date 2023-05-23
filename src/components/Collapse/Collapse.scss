@@ -1,0 +1,18 @@
+@import "src/assets/styles/main";
+
+.collapse {
+  @include flexible($fd: column);
+  width: 100%;
+
+  &__wrapper {
+    @include flexible($fd: row, $ai: center, $jc: space-between);
+    padding: 4px 16px;
+    width: 100%;
+    cursor: pointer;
+  }
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+}

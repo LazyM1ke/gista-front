@@ -3,7 +3,9 @@ import Button from "./UIkit/Button";
 import Icon from "./UIkit/Icon";
 import Header from "./components/Header/Header";
 import SideBar from "./components/SideBar/SideBar";
+import AddGistaPage from "./pages/AddGistaPage/AddGistaPage";
 import AuthPage from "./pages/AuthPage/AuthPage";
+import EditPage from "./pages/CurriculumEditPage/EditPage";
 import MainPage from "./pages/MainPage/MainPage";
 import React from "react";
 
@@ -16,7 +18,9 @@ const App = () => {
       {/*<AuthPage />*/}
       <div className="app__content">
         <SideBar />
-        <MainPage />
+        <AddGistaPage />
+        {/*<EditPage />*/}
+        {/*<MainPage />*/}
       </div>
     </div>
   );
