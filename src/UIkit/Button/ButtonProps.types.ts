@@ -6,7 +6,7 @@ type ButtonSize = "small" | "medium" | "large";
 
 interface ButtonProps {
   className?: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 
   type?: ButtonTypes;
   size?: ButtonSize;

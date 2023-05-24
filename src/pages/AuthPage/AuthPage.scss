@@ -2,13 +2,17 @@
 
 .auth-page {
   @include flexible($fd: column, $gap: 16px);
-  height: 100vh;
+  height: 100%;
   background: url("src/assets/images/Gradient.png") no-repeat ;
   background-size: cover;
+  width: 100%;
   &__content {
+    height: 100%;
     @include flexible($fd: row);
+    width: 100%;
   }
   &__img {
+    height: 100%;
     margin-right: 350px;
   }
 

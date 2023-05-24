@@ -17,19 +17,19 @@ const menuItems: IMenuItem[] = [
     id: 1,
     title: "Главная",
     iconName: "keyboardOpen",
-    to: "main",
+    to: "",
   },
   {
     id: 2,
     title: "Подписка",
     iconName: "huobitoken",
-    to: "main",
+    to: "",
   },
   {
     id: 3,
     title: "Аккаунт",
     iconName: "user",
-    to: "main",
+    to: "",
   },
   {
     id: 4,
@@ -50,7 +50,7 @@ const settingsItems: IMenuItem[] = [
     id: 6,
     title: "Настройки",
     iconName: "setting",
-    to: "main",
+    to: "",
   },
 ];
 

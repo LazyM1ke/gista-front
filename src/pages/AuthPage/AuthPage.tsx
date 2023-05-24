@@ -11,10 +11,6 @@ const AuthPage = () => {
   const [password, setPassword] = useState<string>("");
   return (
     <div className="auth-page">
-      <Header>
-        <Button type="primary">Зарегистрироваться</Button>
-        <Button type="secondary">Войти</Button>
-      </Header>
       <div className="auth-page__title">
         <Typography variant="display" color="#fff">
           Препараты в 4К

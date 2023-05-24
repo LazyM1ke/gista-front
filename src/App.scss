@@ -1,7 +1,13 @@
 @import "src/assets/styles/main";
 
 .app {
+  height: 100%;
+  width: 100%;
+  @include flexible($fd: column);
+
   &__content {
-    @include flexible($fd: row)
+    height: 100%;
+    width: 100%;
+    @include flexible($fd: row);
   }
 }

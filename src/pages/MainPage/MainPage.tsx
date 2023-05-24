@@ -6,22 +6,21 @@ import React from "react";
 
 const MainPage = () => {
   return (
-    <PageLayout>
-      <div className="main-page">
-        <Collapse title="Общая гистология">
-          <GistaItem />
-          <GistaItem />
-          <GistaItem />
-          <GistaItem />
-        </Collapse>
-        <Collapse title="Частная гистология">
-          <GistaItem />
-          <GistaItem />
-          <GistaItem />
-          <GistaItem />
-        </Collapse>
-      </div>
-    </PageLayout>
+    <div className="main-page">
+      <Collapse title="Общая гистология">
+        <GistaItem />
+        <GistaItem />
+        <GistaItem />
+        <GistaItem />
+      </Collapse>
+      <Collapse title="Частная гистология">
+        <GistaItem />
+        <GistaItem />
+        <GistaItem />
+        <GistaItem />
+        <GistaItem />
+      </Collapse>
+    </div>
   );
 };
 

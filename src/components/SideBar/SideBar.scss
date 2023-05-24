@@ -4,17 +4,20 @@
   @include flexible($fd: column, $jc: space-between);
   padding: 24px 0 12px 12px;
   width: 224px;
-  height: 90vh;
+  height: 100%;
+
   border-right: 1px solid #DEDEDE;
   &__tabs {
     @include flexible($fd: column, $gap: 16px);
     width: 100%;
+    height: 100%;
 
     &__item {
       @include flexible($fd: row, $gap: 16px, $ai: center);
       padding: 4px 16px;
       cursor: pointer;
       width: 100%;
+
 
       &.active {
         background: linear-gradient(270deg, rgba(0, 127, 255, 0.04) 0%, rgba(0, 127, 255, 0) 100%);

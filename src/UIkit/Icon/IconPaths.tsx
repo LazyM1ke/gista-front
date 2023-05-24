@@ -213,6 +213,16 @@ const iconsPaths = {
       strokeLinejoin="round"
     />
   ),
+  close: (
+    <path
+      id="close"
+      d="M6 18L18 6M18 18L6 6"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  ),
 };
 
 export interface IconPathProps extends ReactElement<SVGGraphicsElement> {

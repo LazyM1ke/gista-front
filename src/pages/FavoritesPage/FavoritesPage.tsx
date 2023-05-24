@@ -6,19 +6,17 @@ import React from "react";
 
 const FavoritesPage = () => {
   return (
-    <PageLayout>
-      <div className="favorites">
-        <Typography className="favorites__title" variant="headline-h1">
-          Избранное
-        </Typography>
-        <div className="favorites__items">
-          <GistaItem />
-          <GistaItem />
-          <GistaItem />
-          <GistaItem />
-        </div>
+    <div className="favorites">
+      <Typography className="favorites__title" variant="headline-h1">
+        Избранное
+      </Typography>
+      <div className="favorites__items">
+        <GistaItem />
+        <GistaItem />
+        <GistaItem />
+        <GistaItem />
       </div>
-    </PageLayout>
+    </div>
   );
 };
 

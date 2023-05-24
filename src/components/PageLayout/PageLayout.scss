@@ -1,8 +1,11 @@
 @import "src/assets/styles/main";
 
 .page-layout {
+  height: 100%;
   @include flexible($fd: column);
+  width: 100%;
   &__content {
+    height: 100%;
     @include flexible($fd: row);
     width: 100%;
   }

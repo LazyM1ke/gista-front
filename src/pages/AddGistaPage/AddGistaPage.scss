@@ -4,6 +4,7 @@
   @include flexible($fd: column);
   padding: 16px 32px;
   width: 100%;
+
   &__header {
     @include flexible($fd: row, $jc: space-between, $ai: center);
     width: 100%;
@@ -27,4 +28,6 @@
     margin-top: 24px;
     @include flexible($fd: row, $gap: 16px, $ai: center);
   }
+
+
 }
