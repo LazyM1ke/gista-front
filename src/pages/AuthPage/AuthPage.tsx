@@ -7,7 +7,7 @@ import "./AuthPage.scss";
 import React, { useState } from "react";
 
 const AuthPage = () => {
-  const [email, setEmail] = useState<string>("");
+  const [email, setEmail] = useState<string>("test");
   const [password, setPassword] = useState<string>("");
   return (
     <div className="auth-page">
