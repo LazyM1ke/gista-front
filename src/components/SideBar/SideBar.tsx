@@ -19,12 +19,12 @@ const menuItems: IMenuItem[] = [
     iconName: "keyboardOpen",
     to: "",
   },
-  {
-    id: 2,
-    title: "Подписка",
-    iconName: "huobitoken",
-    to: "",
-  },
+  // {
+  //   id: 2,
+  //   title: "Подписка",
+  //   iconName: "huobitoken",
+  //   to: "",
+  // },
   {
     id: 3,
     title: "Аккаунт",
