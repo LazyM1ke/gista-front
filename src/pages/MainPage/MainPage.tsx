@@ -1,6 +1,5 @@
 import Collapse from "../../components/Collapse/Collapse";
 import GistaItem from "../../components/GistaItem/GistaItem";
-import PageLayout from "../../components/PageLayout/PageLayout";
 import "./MainPage.scss";
 import React from "react";
 
@@ -14,6 +13,14 @@ const MainPage = () => {
         <GistaItem />
       </Collapse>
       <Collapse title="Частная гистология">
+        <GistaItem />
+        <GistaItem />
+        <GistaItem />
+        <GistaItem />
+        <GistaItem />
+        <GistaItem />
+        <GistaItem />
+        <GistaItem />
         <GistaItem />
         <GistaItem />
         <GistaItem />
