@@ -2,30 +2,35 @@
 
 .auth-page {
   @include flexible($fd: column, $gap: 16px);
-  height: 100%;
+  min-height: 100%;
   background: url("src/assets/images/Gradient.png") no-repeat ;
   background-size: cover;
   width: 100%;
+  position: relative;
   &__content {
-    height: 100%;
-    @include flexible($fd: row);
+    @include flexible($fd: row, $jc: space-between);
     width: 100%;
   }
   &__img {
-    height: 100%;
     margin-right: 350px;
+    position: absolute;
+    bottom: 0;
+  }
+  &__title {
+    margin: 40px 0 0 34px;
+    width: 455px;
   }
 
 
   &__form {
     @include flexible($fd: column, $gap: 32px);
     margin-top: 50px;
+    margin-right: 250px;
     padding: 32px 40px;
+    width: 420px;
     background-color: #fff;
     border-radius: 16px;
-    &__input {
 
-    }
     &__title {
       margin: 0 auto;
       font-family: NT Somic-Bold, sans-serif;
@@ -37,15 +42,58 @@
     }
     &__submit {
       @include flexible($fd: column, $gap: 24px);
+      width: 100%;
     }
     &__register {
       @include flexible($fd: row, $gap: 32px);
     }
   }
+  
+}
 
-  &__title {
-    margin: 54px 0 0 34px;
+@media (max-width: 1500px){
+  .auth-page {
+    height: 100%;
+    &__img {
+      display: none;
+    }
+    &__title {
+      display: none;
+    }
+    &__content {
+      @include flexible($fd: column, $jc: center);
+      width: 100%;
+      height: 100%;
+    }
+    &__form {
+      @include flexible($fd: column, $jc: center);
+      margin: 0 auto;
+    }
+
   }
+}
 
+@media (max-width: 550px){
+  .auth-page {
+    height: 100%;
+    padding: 24px;
+    width: 100%;
+    &__content {
+      @include flexible($fd: column, $jc: space-between, $ai:center);
+      width: 100%;
+      height: 100%;
+    }
 
+    &__form {
+      width: 327px;
+      &__submit{
+        @include flexible($fd: column, $gap: 16px, $ai: center);
+        width: 311px;
+      }
+      &__register {
+        @include flexible($fd: row, $jc: space-between, $ai: center);
+      }
+    }
+
+  }
 }
