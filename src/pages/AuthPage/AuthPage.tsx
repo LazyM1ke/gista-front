@@ -51,7 +51,9 @@ const AuthPage = () => {
             </Button>
             <div className="auth-page__form__register">
               <Typography color="#FFFFFF">Нет аккаунта?</Typography>
-              <Button type="invert">Зарегистрироваться</Button>
+              <Button className="auth-page__form__register-btn" type="invert">
+                Зарегистрироваться
+              </Button>
             </div>
           </div>
         </div>

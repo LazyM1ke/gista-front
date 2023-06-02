@@ -75,6 +75,7 @@
 
 @media (max-width: 550px){
   .auth-page {
+    @include flexible($fd: column, $jc: center, $ai:center);
     height: 100%;
     padding: 24px;
     width: 100%;
@@ -91,9 +92,21 @@
         width: 311px;
       }
       &__register {
-        @include flexible($fd: row, $jc: space-between, $ai: center);
+        @include flexible($fd: row, $gap: 8px, $ai: center);
+        &-btn {
+          padding: 4px 12px;
+        }
       }
     }
 
+  }
+}
+
+@media (max-width: 320px) {
+  .auth-page {
+    padding: 21px 0;
+    &__form {
+      width: 300px;
+    }
   }
 }
