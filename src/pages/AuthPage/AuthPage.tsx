@@ -40,19 +40,29 @@ const AuthPage = () => {
                 setValue={setPassword}
                 placeholder="Пароль"
               />
+              <Typography
+                className="auth-page__form__forgot"
+                variant="text-14"
+                color="#007FFF"
+              >
+                Забыли пароль?
+              </Typography>
             </div>
-            <Typography variant="text-14" color="#007FFF">
-              Забыли пароль?
-            </Typography>
           </form>
           <div className="auth-page__form__submit">
-            <Button fullWidth type="invert">
+            <Button size="large" fullWidth type="invert">
               Войти
             </Button>
             <div className="auth-page__form__register">
               <Typography color="#FFFFFF">Нет аккаунта?</Typography>
-              <Button className="auth-page__form__register-btn" type="invert">
-                Зарегистрироваться
+              <Button
+                size="small"
+                className="auth-page__form__register-btn"
+                type="invert"
+              >
+                <Typography color="#007FFF" variant="text-14">
+                  Зарегистрироваться
+                </Typography>
               </Button>
             </div>
           </div>
@@ -99,7 +109,9 @@ const AuthPage = () => {
             Забыли пароль?
           </Typography>
           <div className="auth-page__form__submit">
-            <Button fullWidth>Войти</Button>
+            <Button size="large" fullWidth>
+              Войти
+            </Button>
             <div className="auth-page__form__register">
               <Typography color="#787878">Нет аккаунта?</Typography>
               <Typography color="#007FFF">Зарегистрироваться</Typography>

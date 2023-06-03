@@ -21,8 +21,12 @@ const App = () => {
           <Icon iconName="profileCircle" />
         ) : (
           <>
-            <Button type="primary">Зарегистрироваться</Button>
-            <Button type="secondary">Войти</Button>
+            <Button size="medium" type="primary">
+              Зарегистрироваться
+            </Button>
+            <Button size="medium" type="secondary">
+              Войти
+            </Button>
           </>
         )}
       </Header>

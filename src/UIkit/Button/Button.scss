@@ -5,6 +5,21 @@
   @include flexible(center, center, $gap: 4px);
   padding: 8px 16px;
 
+  // Button Sizes
+
+  &--small {
+    height: 29px;
+  }
+
+  &--medium {
+    height: 32px;
+  }
+
+  &--large {
+    height: 40px;
+
+  }
+
   &-full-width {
     @include fixedWidth(100%, $min-size: 0);
     padding: 0;
@@ -12,7 +27,6 @@
 
   // Button Types
   &--primary {
-    height: 40px;
     background-color: #007FFF;
     @include border($border-radius: 8px);
 
@@ -22,7 +36,6 @@
   }
 
   &--secondary {
-    height: 40px;
     background-color: #D4E9FF;
     @include border($border-radius: 8px);
 
@@ -32,7 +45,6 @@
   }
 
   &--borderless {
-    height: 40px;
     background-color: transparent;
     @include border($border-radius: 8px);
 
@@ -42,7 +54,6 @@
   }
 
   &--invert {
-    height: 40px;
     background-color: #FFFFFF;
     @include border($border-radius: 8px);
 

@@ -6,7 +6,7 @@ import React from "react";
 
 const Button = ({
   className,
-  children = "",
+  children = "Кнопка",
 
   type = "primary",
   size = "medium",
