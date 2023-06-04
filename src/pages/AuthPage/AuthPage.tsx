@@ -50,7 +50,12 @@ const AuthPage = () => {
             </div>
           </form>
           <div className="auth-page__form__submit">
-            <Button size="large" fullWidth type="invert">
+            <Button
+              className="auth-page__form__submit-btn"
+              size="large"
+              fullWidth
+              type="invert"
+            >
               Войти
             </Button>
             <div className="auth-page__form__register">
@@ -81,43 +86,48 @@ const AuthPage = () => {
         </Typography>
       </div>
       <div className="auth-page__content">
-        <div>
-          <img className="auth-page__img" src={MacImage} alt="imac" />
+        <div className="auth-page__img">
+          <img src={MacImage} alt="imac" />
         </div>
 
-        <form className="auth-page__form">
-          <Typography className="auth-page__form__title" variant="headline-h2">
-            Вход
-          </Typography>
-          <div className="auth-page__form__inputs">
-            <TextInput
-              type="text"
-              className="auth-page__form__input"
-              value={email}
-              setValue={setEmail}
-              placeholder="E-mail"
-            />
-            <TextInput
-              type="password"
-              className="auth-page__form__input"
-              value={password}
-              setValue={setPassword}
-              placeholder="Пароль"
-            />
-          </div>
-          <Typography variant="text-14" color="#007FFF">
-            Забыли пароль?
-          </Typography>
-          <div className="auth-page__form__submit">
-            <Button size="large" fullWidth>
-              Войти
-            </Button>
-            <div className="auth-page__form__register">
-              <Typography color="#787878">Нет аккаунта?</Typography>
-              <Typography color="#007FFF">Зарегистрироваться</Typography>
+        <div className="auth-page__form-wrapper">
+          <form className="auth-page__form">
+            <Typography
+              className="auth-page__form__title"
+              variant="headline-h2"
+            >
+              Вход
+            </Typography>
+            <div className="auth-page__form__inputs">
+              <TextInput
+                type="text"
+                className="auth-page__form__input"
+                value={email}
+                setValue={setEmail}
+                placeholder="E-mail"
+              />
+              <TextInput
+                type="password"
+                className="auth-page__form__input"
+                value={password}
+                setValue={setPassword}
+                placeholder="Пароль"
+              />
             </div>
-          </div>
-        </form>
+            <Typography variant="text-14" color="#007FFF">
+              Забыли пароль?
+            </Typography>
+            <div className="auth-page__form__submit">
+              <Button size="large" fullWidth>
+                Войти
+              </Button>
+              <div className="auth-page__form__register">
+                <Typography color="#787878">Нет аккаунта?</Typography>
+                <Typography color="#007FFF">Зарегистрироваться</Typography>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

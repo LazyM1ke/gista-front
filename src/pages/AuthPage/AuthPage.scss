@@ -8,13 +8,17 @@
   width: 100%;
   position: relative;
   &__content {
-    @include flexible($fd: row, $jc: space-between);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     width: 100%;
+    min-height: 100%;
   }
   &__img {
-    margin-right: 350px;
-    position: absolute;
-    bottom: 0;
+    min-height: 100vh ;
+    img {
+      position: absolute;
+      bottom: 200px;
+    }
   }
   &__title {
     margin: 40px 0 0 34px;
@@ -23,11 +27,11 @@
 
 
   &__form {
-    @include flexible($fd: column, $gap: 32px);
-    margin-top: 50px;
-    margin-right: 250px;
+    @include flexible($fd: column, $gap: 32px, $jc: center);
+    margin: 100px auto;
     padding: 32px 40px;
     width: 420px;
+    //height: 397px;
     background-color: #fff;
     border-radius: 16px;
 
@@ -96,7 +100,6 @@
       }
       &__submit{
         @include flexible($fd: column, $gap: 16px, $ai: center);
-        width: 311px;
       }
       &__register {
         @include flexible($fd: row, $gap: 8px, $ai: center);
@@ -115,6 +118,11 @@
     &__form {
       width: 300px;
       padding: 12px 16px;
+      &__submit{
+        @include flexible($fd: column, $gap: 16px, $ai: center);
+        width: 300px;
+      }
     }
+
   }
 }
