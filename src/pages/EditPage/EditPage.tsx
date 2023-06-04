@@ -10,8 +10,11 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const EditPage = () => {
-  const [modalActive, setModalActive] = useState<boolean>(false);
-  const [gistaFolder, setGistaFolder] = useState<string>("");
+  const [addGistaModalActive, setAddGistaModalActive] =
+    useState<boolean>(false);
+  const [addFolderModalActive, setAddFolderModalActive] =
+    useState<boolean>(false);
+  const [gistaSection, setGistaSection] = useState<string>("");
   const [gistaName, setGistaName] = useState<string>("");
   const navigate = useNavigate();
   return (
@@ -23,14 +26,15 @@ const EditPage = () => {
         <div className="edit-page__header__btns">
           <div
             className="edit-page__header__btn"
-            onClick={() => {
-              setModalActive(true);
-            }}
+            onClick={() => setAddGistaModalActive(true)}
           >
             <Icon color="#007FFF" iconName="bubble" />
             <Typography color="#007FFF">Добавить препарат</Typography>
           </div>
-          <div className="edit-page__header__btn">
+          <div
+            className="edit-page__header__btn"
+            onClick={() => setAddFolderModalActive(true)}
+          >
             <Icon color="#007FFF" iconName="folder" />
             <Typography color="#007FFF">Добавить раздел</Typography>
           </div>
@@ -50,39 +54,44 @@ const EditPage = () => {
           <GistaItem />
         </Collapse>
       </div>
-      {modalActive && (
-        <Modal active={modalActive}>
-          <div className="edit-page__modal__close">
-            <Button
-              type="borderless"
-              leftIcon={<Icon color="#007FFF" iconName="close" />}
-              onClick={() => setModalActive(!modalActive)}
-            />
-          </div>
-          <div className="edit-page__modal__content">
-            <Typography
-              className="edit-page__modal__content__title"
-              variant="headline-h2"
-            >
-              Добавить препарат
-            </Typography>
-            <TextInput
-              placeholder="Раздел"
-              value={gistaFolder}
-              setValue={setGistaFolder}
-              type="text"
-            />
-            <TextInput
-              placeholder="Название препарата"
-              value={gistaName}
-              setValue={setGistaName}
-              type="text"
-            />
-            <div className="edit-page__modal__btns">
-              <Button>Добавить</Button>
-              <Button type="borderless">Отмена</Button>
-            </div>
-          </div>
+      {addGistaModalActive && (
+        <Modal
+          setActive={setAddGistaModalActive}
+          title="Добавить препарат"
+          active={addGistaModalActive}
+        >
+          <TextInput
+            placeholder="Раздел"
+            value={gistaSection}
+            setValue={setGistaSection}
+            type="text"
+          />
+          <TextInput
+            placeholder="Название препарата"
+            value={gistaName}
+            setValue={setGistaName}
+            type="text"
+          />
+        </Modal>
+      )}
+      {addFolderModalActive && (
+        <Modal
+          setActive={setAddFolderModalActive}
+          title="Добавить раздел"
+          active={addFolderModalActive}
+        >
+          <TextInput
+            placeholder="Раздел"
+            value={gistaSection}
+            setValue={setGistaSection}
+            type="text"
+          />
+          <TextInput
+            placeholder="Название препарата"
+            value={gistaName}
+            setValue={setGistaName}
+            type="text"
+          />
         </Modal>
       )}
     </div>

@@ -1,3 +1,4 @@
+@import "src/assets/styles/main";
 .modal {
   height: 100vh;
   width: 100vw;
@@ -10,67 +11,32 @@
   align-items: center;
   justify-content: center;
   transition: 0.5s;
-  &.active {
-    opacity: 1;
+
+
+  &__close {
+    @include flexible($fd: row, $jc: flex-end);
   }
   &__content {
     padding: 20px;
     border-radius: 8px;
     width: 380px;
     background: #FFFFFF;
-    &-title {
-      display: flex;
-      align-items: center;
-      flex-direction: row;
-      position: relative;
-      justify-content: center;
-      h2 {
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 24px;
-        color: #050510;
-      }
-      .closeBtn {
-        position: absolute;
-        right: 23px;
-        cursor: pointer;
-
-      }
+    &__container {
+      @include flexible($fd: column, $gap: 16px);
+      margin-top: 4px;
+    }
+    &__title {
+      margin: 0 auto;
+      font-family: "NT Somic-Bold", sans-serif;
     }
 
-    &__wrapper {
-      margin-top: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 35px;
-
-      &-item {
-        display: flex;
-        align-items: center;
-        input {
-          cursor: pointer;
-          -webkit-appearance: none;
-          -moz-appearance: none;
-          appearance: none;
-          border-radius: 50%;
-          width: 20px;
-          height: 20px;
-          border: 2px solid #6534FF;
-          transition: 0.2s all linear;
-          outline: none;
-          &:checked {
-            border: 6px solid #6534FF;
-          }
-        }
-        span {
-          font-weight: 500;
-          font-size: 16px;
-          line-height: 20px;
-          color: #050510;
-          margin-left: 14px;
-
-        }
-      }
+    &.active {
+      opacity: 1;
     }
   }
+  &__btns {
+    @include flexible($fd: row, $gap: 6px);
+  }
+
+
 }

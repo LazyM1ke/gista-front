@@ -4,20 +4,6 @@
   @include flexible($fd: column);
   padding: 32px 32px;
   width: 100%;
-  &__modal__close {
-    @include flexible($fd: row, $jc: flex-end);
-  }
-  &__modal__content {
-    @include flexible($fd: column, $gap: 16px);
-    margin-top: 4px;
-    &__title {
-      margin: 0 auto;
-      font-family: "NT Somic-Bold", sans-serif;
-    }
-  }
-  &__modal__btns {
-    @include flexible($fd: row, $gap: 6px);
-  }
   &__content {
     @include flexible($fd: column, $gap: 16px);
     width: 100%;
@@ -34,7 +20,5 @@
       @include flexible($fd: row, $gap: 8px);
       cursor: pointer;
     }
-
-
   }
 }
