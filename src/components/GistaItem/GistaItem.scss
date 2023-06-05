@@ -6,8 +6,16 @@
   border: 1px solid #DEDEDE;
   border-radius: 8px;
 
+  &__title {
+    padding: 16px 0 16px 16px;
+  }
+  &__icons {
+    @include flexible($fd: column, $ai: center, $gap: 16px);
+    margin-right: 12px;
+
+  }
+
   &__content {
-    @include flexible($fd: row, $gap: 14px, $ai: center);
-    padding: 16px 24px 16px 16px;
+    @include flexible($fd: row, $ai: center, $gap: 24px);
   }
 }

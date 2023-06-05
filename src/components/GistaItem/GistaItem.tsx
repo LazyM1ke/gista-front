@@ -2,17 +2,36 @@ import Icon from "../../UIkit/Icon";
 import Typography from "../../UIkit/Typography";
 import GistaImage from "../../assets/images/Intersect.png";
 import "./GistaItem.scss";
-import React from "react";
+import GistaItemProps from "./GistaItemProps.types";
+import React, { useState } from "react";
 
-const GistaItem = () => {
+const GistaItem = ({ editable = false }: GistaItemProps) => {
+  const [hover, setHover] = useState<boolean>(false);
+
   return (
-    <div className="gista-item">
+    <div
+      className="gista-item"
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+    >
       <img src={GistaImage} alt="gista" />
       <div className="gista-item__content">
-        <Typography variant="headline-h2">
+        <Typography className="gista-item__title" variant="headline-h2">
           Мазок крови человека – окраска: азур II и эозин
         </Typography>
-        <Icon iconName="star" />
+        <div className="gista-item__icons">
+          {hover && editable && (
+            <>
+              <Icon iconName="edit" />
+              <Icon iconName="trash" />
+            </>
+          )}
+          {hover && !editable && (
+            <>
+              <Icon iconName="star" />
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

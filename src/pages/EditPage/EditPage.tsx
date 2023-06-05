@@ -1,4 +1,3 @@
-import Button from "../../UIkit/Button";
 import Icon from "../../UIkit/Icon";
 import TextInput from "../../UIkit/Input/TextInput/TextInput";
 import Modal from "../../UIkit/Modal/Modal";
@@ -41,17 +40,40 @@ const EditPage = () => {
         </div>
       </div>
       <div className="edit-page__content">
-        <Collapse title="Общая гистология">
-          <GistaItem />
-          <GistaItem />
-          <GistaItem />
-          <GistaItem />
+        <Collapse type="section" title="Общая гистология">
+          <GistaItem editable />
+          <GistaItem editable />
+          <GistaItem editable />
+          <GistaItem editable />
         </Collapse>
-        <Collapse title="Общая гистология">
-          <GistaItem />
-          <GistaItem />
-          <GistaItem />
-          <GistaItem />
+        <Collapse type="section" title="Частная гистология">
+          <Collapse
+            editable
+            title="Органы кроветворения и иммуногенеза"
+            type="subsection"
+          >
+            <GistaItem />
+            <GistaItem />
+            <GistaItem />
+          </Collapse>
+          <Collapse
+            editable
+            title="Органы кроветворения и иммуногенеза"
+            type="subsection"
+          >
+            <GistaItem />
+            <GistaItem />
+            <GistaItem />
+          </Collapse>
+          <Collapse
+            editable
+            title="Органы кроветворения и иммуногенеза"
+            type="subsection"
+          >
+            <GistaItem />
+            <GistaItem />
+            <GistaItem />
+          </Collapse>
         </Collapse>
       </div>
       {addGistaModalActive && (
