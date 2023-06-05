@@ -10,6 +10,7 @@ const Collapse = ({
   children,
   className,
   type,
+  isEditPosition = false,
   editable = false,
 }: CollapseProps) => {
   const [isOpened, setIsOpened] = useState<boolean>(false);
@@ -26,14 +27,17 @@ const Collapse = ({
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
         >
-          <Typography
-            className={
-              type === "section" ? "collapse__title--bold" : "collapse__title"
-            }
-            variant={type === "section" ? "headline-h1" : "title-h1"}
-          >
-            {title}
-          </Typography>
+          <div className="collapse__title__wrapper">
+            {editable && isEditPosition && <Icon iconName="hamburger" />}
+            <Typography
+              className={
+                type === "section" ? "collapse__title--bold" : "collapse__title"
+              }
+              variant={type === "section" ? "headline-h1" : "title-h1"}
+            >
+              {title}
+            </Typography>
+          </div>
           <div className="collapse__icons">
             {hover && editable && (
               <>

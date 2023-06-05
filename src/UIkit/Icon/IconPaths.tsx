@@ -244,6 +244,15 @@ const iconsPaths = {
       strokeLinejoin="round"
     />
   ),
+  hamburger: (
+    <path
+      id="hamburger"
+      d="M3 7H21M3 12H21M3 17H21"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+    />
+  ),
 };
 
 export interface IconPathProps extends ReactElement<SVGGraphicsElement> {

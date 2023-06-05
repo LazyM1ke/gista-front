@@ -6,6 +6,9 @@
   &__title {
     &--bold {
       font-family: 'NT Somic-Bold', sans-serif;
+    }
+    &__wrapper {
+      @include flexible($fd: row, $ai: center, $gap: 16px);
 
     }
   }

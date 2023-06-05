@@ -6,6 +6,7 @@ interface CollapseProps {
   children?: React.ReactNode;
   type: "section" | "subsection";
   editable?: boolean;
+  isEditPosition?: boolean;
 }
 
 export default CollapseProps;

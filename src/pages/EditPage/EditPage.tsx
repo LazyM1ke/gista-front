@@ -15,6 +15,8 @@ const EditPage = () => {
     useState<boolean>(false);
   const [gistaSection, setGistaSection] = useState<string>("");
   const [gistaName, setGistaName] = useState<string>("");
+
+  const [isEditPosition, setIsEditPosition] = useState<boolean>(true);
   const navigate = useNavigate();
   return (
     <div className="edit-page">
@@ -23,6 +25,14 @@ const EditPage = () => {
           Редактирование учебного плана
         </Typography>
         <div className="edit-page__header__btns">
+          <div
+            className="edit-page__header__btn"
+            onClick={() => setIsEditPosition(!isEditPosition)}
+          >
+            <Typography color="#007FFF">
+              {isEditPosition ? "Сохранить" : "Изменить порядок"}
+            </Typography>
+          </div>
           <div
             className="edit-page__header__btn"
             onClick={() => setAddGistaModalActive(true)}
@@ -48,6 +58,7 @@ const EditPage = () => {
         </Collapse>
         <Collapse type="section" title="Частная гистология">
           <Collapse
+            isEditPosition={isEditPosition}
             editable
             title="Органы кроветворения и иммуногенеза"
             type="subsection"
@@ -57,6 +68,7 @@ const EditPage = () => {
             <GistaItem />
           </Collapse>
           <Collapse
+            isEditPosition={isEditPosition}
             editable
             title="Органы кроветворения и иммуногенеза"
             type="subsection"
@@ -66,6 +78,7 @@ const EditPage = () => {
             <GistaItem />
           </Collapse>
           <Collapse
+            isEditPosition={isEditPosition}
             editable
             title="Органы кроветворения и иммуногенеза"
             type="subsection"
