@@ -4,7 +4,8 @@
   @include flexible($fd: column, $jc: space-between);
   padding: 24px 0 12px 12px;
   width: 224px;
-  height: 100%;
+  max-height: 93vh;
+  min-height: 93vh;
   border-right: 1px solid #DEDEDE;
   &__tabs {
     @include flexible($fd: column, $gap: 16px);
