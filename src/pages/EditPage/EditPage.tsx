@@ -1,23 +1,43 @@
 import Icon from "../../UIkit/Icon";
 import TextInput from "../../UIkit/Input/TextInput/TextInput";
 import Modal from "../../UIkit/Modal/Modal";
+import CustomSelect from "../../UIkit/Select/Select";
+import { SelectItem } from "../../UIkit/Select/SelectProps.types";
 import Typography from "../../UIkit/Typography";
 import Collapse from "../../components/Collapse/Collapse";
 import GistaItem from "../../components/GistaItem/GistaItem";
 import "./EditPage.scss";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import Select from "react-select/base";
+
+const mainSections: SelectItem[] = [
+  {
+    id: "1",
+    name: "Бесплатный доступ",
+    value: "Бесплатный доступ",
+  },
+  {
+    id: "2",
+    name: "Общая гистология",
+    value: "Общая гистология",
+  },
+  {
+    id: "3",
+    name: "Частная гистология",
+    value: "Частная гистология",
+  },
+];
 
 const EditPage = () => {
   const [addGistaModalActive, setAddGistaModalActive] =
     useState<boolean>(false);
-  const [addFolderModalActive, setAddFolderModalActive] =
+  const [addSectionModalActive, setAddSectionModalActive] =
     useState<boolean>(false);
+
   const [gistaSection, setGistaSection] = useState<string>("");
   const [gistaName, setGistaName] = useState<string>("");
 
-  const [isEditPosition, setIsEditPosition] = useState<boolean>(true);
-  const navigate = useNavigate();
+  const [isEditPosition, setIsEditPosition] = useState<boolean>(false);
   return (
     <div className="edit-page">
       <div className="edit-page__header">
@@ -42,7 +62,7 @@ const EditPage = () => {
           </div>
           <div
             className="edit-page__header__btn"
-            onClick={() => setAddFolderModalActive(true)}
+            onClick={() => setAddSectionModalActive(true)}
           >
             <Icon color="#007FFF" iconName="folder" />
             <Typography color="#007FFF">Добавить раздел</Typography>
@@ -109,20 +129,15 @@ const EditPage = () => {
           />
         </Modal>
       )}
-      {addFolderModalActive && (
+      {addSectionModalActive && (
         <Modal
-          setActive={setAddFolderModalActive}
+          setActive={setAddSectionModalActive}
           title="Добавить раздел"
-          active={addFolderModalActive}
+          active={addSectionModalActive}
         >
+          <CustomSelect id="1" name="Основной раздел" data={mainSections} />
           <TextInput
-            placeholder="Раздел"
-            value={gistaSection}
-            setValue={setGistaSection}
-            type="text"
-          />
-          <TextInput
-            placeholder="Название препарата"
+            placeholder="Название подраздела"
             value={gistaName}
             setValue={setGistaName}
             type="text"

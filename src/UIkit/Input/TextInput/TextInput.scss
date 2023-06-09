@@ -7,6 +7,9 @@
     padding: 8px 16px;
     border: 1px solid #DEDEDE;
     border-radius: 8px;
+    &::placeholder{
+      color: #A1A1A1;
+    }
     &:focus {
       border: 1px solid #007FFF;
     }
