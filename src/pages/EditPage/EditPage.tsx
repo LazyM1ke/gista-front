@@ -8,7 +8,7 @@ import Collapse from "../../components/Collapse/Collapse";
 import GistaItem from "../../components/GistaItem/GistaItem";
 import "./EditPage.scss";
 import React, { useState } from "react";
-import Select from "react-select/base";
+import Select from "react-select";
 
 const mainSections: SelectItem[] = [
   {
@@ -28,11 +28,19 @@ const mainSections: SelectItem[] = [
   },
 ];
 
+const options = [
+  { value: "Бесплатный доступ", label: "Бесплатный доступ" },
+  { value: "Общая гистология", label: "Общая гистология" },
+  { value: "Частная гистология", label: "Частная гистология" },
+];
+
 const EditPage = () => {
   const [addGistaModalActive, setAddGistaModalActive] =
     useState<boolean>(false);
   const [addSectionModalActive, setAddSectionModalActive] =
     useState<boolean>(false);
+
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   const [gistaSection, setGistaSection] = useState<string>("");
   const [gistaName, setGistaName] = useState<string>("");
@@ -135,6 +143,41 @@ const EditPage = () => {
           title="Добавить раздел"
           active={addSectionModalActive}
         >
+          <Select
+            placeholder="Основной раздел"
+            styles={{
+              control: (baseStyles, state) => ({
+                ...baseStyles,
+                width: "340px",
+                height: "40px",
+                borderStyle: "solid",
+                borderWidth: "1px",
+                borderColor: state.menuIsOpen ? "#007FFF" : "#DEDEDE",
+                borderRadius: "8px",
+                fontFamily: "Lato",
+                fontStyle: "normal",
+                fontWeight: 400,
+                fontSize: "16px",
+                lineHeight: "24px",
+              }),
+              option: (baseStyles, state) => ({
+                cursor: "pointer",
+                fontFamily: "inherit",
+                fontStyle: "normal",
+                fontWeight: 400,
+                fontSize: "16px",
+                lineHeight: "24px",
+                padding: "8px 16px",
+                ":hover": {
+                  ...baseStyles[":hover"],
+                  backgroundColor: "#F2F2F2",
+                },
+              }),
+            }}
+            defaultValue={selectedOption}
+            onChange={setSelectedOption}
+            options={options}
+          />
           <CustomSelect id="1" name="Основной раздел" data={mainSections} />
           <TextInput
             placeholder="Название подраздела"
