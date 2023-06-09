@@ -1,15 +1,23 @@
 import Button from "../../UIkit/Button";
 import Icon from "../../UIkit/Icon";
-import TextInput from "../../UIkit/Input/TextInput/TextInput";
-import Modal from "../../UIkit/Modal/Modal";
 import Typography from "../../UIkit/Typography";
 import UploadImg from "../../assets/images/uploadimg.png";
 import ToolBar from "../../components/ToolBar/ToolBar";
 import "./AddGistaPage.scss";
-import React, { useState } from "react";
+import React, { ChangeEvent, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AddGistaPage = () => {
+  const [file, setFile] = useState<File>();
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) {
+      return;
+    }
+
+    setFile(e.target.files[0]);
+  };
   const navigate = useNavigate();
   return (
     <div className="add-gista-page">
@@ -33,7 +41,15 @@ const AddGistaPage = () => {
         <div className="add-gista-page__upload">
           <div className="add-gista-page__upload__content">
             <img src={UploadImg} alt="upload-image" />
-            <Button type="invert">Загрузить изображение</Button>
+            <Button onClick={() => inputRef.current?.click()} type="invert">
+              Загрузить изображение
+            </Button>
+            <input
+              onChange={handleFileChange}
+              ref={inputRef}
+              type="file"
+              hidden
+            />
           </div>
 
           <div className="add-gista-page__layers">
