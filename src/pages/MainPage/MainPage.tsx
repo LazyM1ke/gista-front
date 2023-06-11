@@ -15,21 +15,20 @@ interface SubSection {
   name: string;
   parent_id: string;
 }
-interface getSectionsDataResponse {
+export interface getSectionsDataResponse {
   sections: Section[];
   subsections: SubSection[];
 }
+export const sectionsState = atom<Section[]>({
+  key: "Sections",
+  default: [],
+});
+
+export const subSectionsState = atom<SubSection[]>({
+  key: "SubSections",
+  default: [],
+});
 const MainPage = () => {
-  const sectionsState = atom<Section[]>({
-    key: "Sections",
-    default: [],
-  });
-
-  const subSectionsState = atom<SubSection[]>({
-    key: "SubSections",
-    default: [],
-  });
-
   const [sections, setSections] = useRecoilState(sectionsState);
   const [subSections, setSubSections] = useRecoilState(subSectionsState);
 

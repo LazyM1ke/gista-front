@@ -6,46 +6,111 @@ import { SelectItem } from "../../UIkit/Select/SelectProps.types";
 import Typography from "../../UIkit/Typography";
 import Collapse from "../../components/Collapse/Collapse";
 import GistaItem from "../../components/GistaItem/GistaItem";
+import {
+  getSectionsDataResponse,
+  sectionsState,
+  subSectionsState,
+} from "../MainPage/MainPage";
 import "./EditPage.scss";
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
+import { useRecoilState, useRecoilValue } from "recoil";
 
-const mainSections: SelectItem[] = [
-  {
-    id: "1",
-    name: "Бесплатный доступ",
-    value: "Бесплатный доступ",
-  },
-  {
-    id: "2",
-    name: "Общая гистология",
-    value: "Общая гистология",
-  },
-  {
-    id: "3",
-    name: "Частная гистология",
-    value: "Частная гистология",
-  },
-];
+// const mainSections: SelectItem[] = [
+//   {
+//     id: "1",
+//     name: "Бесплатный доступ",
+//     value: "Бесплатный доступ",
+//   },
+//   {
+//     id: "2",
+//     name: "Общая гистология",
+//     value: "Общая гистология",
+//   },
+//   {
+//     id: "3",
+//     name: "Частная гистология",
+//     value: "Частная гистология",
+//   },
+// ];
+interface selectOption {
+  value: string;
+  label: string;
+}
 
-const options = [
-  { value: "Бесплатный доступ", label: "Бесплатный доступ" },
-  { value: "Общая гистология", label: "Общая гистология" },
-  { value: "Частная гистология", label: "Частная гистология" },
-];
+interface addSubSectionResponseData {
+  id: string;
+  name: string;
+  parent_id: string;
+  status: string;
+}
 
 const EditPage = () => {
+  const [sections, setSections] = useRecoilState(sectionsState);
+  const [subSections, setSubSections] = useRecoilState(subSectionsState);
+
   const [addGistaModalActive, setAddGistaModalActive] =
     useState<boolean>(false);
   const [addSectionModalActive, setAddSectionModalActive] =
     useState<boolean>(false);
 
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [selectedOption, setSelectedOption] = useState<selectOption | null>(
+    null
+  );
+
+  const options: selectOption[] = sections.map((section) => ({
+    value: section.id,
+    label: section.name,
+  }));
 
   const [gistaSection, setGistaSection] = useState<string>("");
   const [gistaName, setGistaName] = useState<string>("");
+  const [newSubSectionName, setNewSubSectionName] = useState<string>("");
 
   const [isEditPosition, setIsEditPosition] = useState<boolean>(false);
+
+  const handleAddSubSection = () => {
+    axios
+      .post<addSubSectionResponseData>(
+        `${import.meta.env.VITE_API_URL}/api/section`,
+        {
+          name: newSubSectionName,
+          parent_id: selectedOption?.value,
+        }
+      )
+      .then((response) => {
+        const { data } = response;
+        setSubSections([
+          ...subSections,
+          {
+            id: data.id,
+            name: data.name,
+            parent_id: data.parent_id,
+          },
+        ]);
+        if (data.status === "success") {
+          setSelectedOption(null);
+          setNewSubSectionName("");
+          setAddSectionModalActive(false);
+        } else {
+          alert("Ошибка !");
+        }
+      });
+  };
+
+  useEffect(() => {
+    axios
+      .get<getSectionsDataResponse>(
+        `${import.meta.env.VITE_API_URL}/api/section`
+      )
+      .then((response) => {
+        const { data } = response;
+        setSections(data.sections);
+        setSubSections(data.subsections);
+      });
+  }, []);
+
   return (
     <div className="edit-page">
       <div className="edit-page__header">
@@ -78,44 +143,65 @@ const EditPage = () => {
         </div>
       </div>
       <div className="edit-page__content">
-        <Collapse type="section" title="Общая гистология">
-          <GistaItem editable />
-          <GistaItem editable />
-          <GistaItem editable />
-          <GistaItem editable />
-        </Collapse>
-        <Collapse type="section" title="Частная гистология">
-          <Collapse
-            isEditPosition={isEditPosition}
-            editable
-            title="Органы кроветворения и иммуногенеза"
-            type="subsection"
-          >
-            <GistaItem />
-            <GistaItem />
-            <GistaItem />
+        {sections.map((section) => (
+          <Collapse key={section.id} title={section.name} type="section">
+            {subSections.map(
+              (subsection) =>
+                subsection.parent_id === section.id && (
+                  <>
+                    <Collapse
+                      key={subsection.id}
+                      title={subsection.name}
+                      type="subsection"
+                    >
+                      <GistaItem editable />
+                      <GistaItem editable />
+                      <GistaItem editable />
+                      <GistaItem editable />
+                    </Collapse>
+                  </>
+                )
+            )}
           </Collapse>
-          <Collapse
-            isEditPosition={isEditPosition}
-            editable
-            title="Органы кроветворения и иммуногенеза"
-            type="subsection"
-          >
-            <GistaItem />
-            <GistaItem />
-            <GistaItem />
-          </Collapse>
-          <Collapse
-            isEditPosition={isEditPosition}
-            editable
-            title="Органы кроветворения и иммуногенеза"
-            type="subsection"
-          >
-            <GistaItem />
-            <GistaItem />
-            <GistaItem />
-          </Collapse>
-        </Collapse>
+        ))}
+        {/*<Collapse type="section" title="Общая гистология">*/}
+        {/*  <GistaItem editable />*/}
+        {/*  <GistaItem editable />*/}
+        {/*  <GistaItem editable />*/}
+        {/*  <GistaItem editable />*/}
+        {/*</Collapse>*/}
+        {/*<Collapse type="section" title="Частная гистология">*/}
+        {/*  <Collapse*/}
+        {/*    isEditPosition={isEditPosition}*/}
+        {/*    editable*/}
+        {/*    title="Органы кроветворения и иммуногенеза"*/}
+        {/*    type="subsection"*/}
+        {/*  >*/}
+        {/*    <GistaItem />*/}
+        {/*    <GistaItem />*/}
+        {/*    <GistaItem />*/}
+        {/*  </Collapse>*/}
+        {/*  <Collapse*/}
+        {/*    isEditPosition={isEditPosition}*/}
+        {/*    editable*/}
+        {/*    title="Органы кроветворения и иммуногенеза"*/}
+        {/*    type="subsection"*/}
+        {/*  >*/}
+        {/*    <GistaItem />*/}
+        {/*    <GistaItem />*/}
+        {/*    <GistaItem />*/}
+        {/*  </Collapse>*/}
+        {/*  <Collapse*/}
+        {/*    isEditPosition={isEditPosition}*/}
+        {/*    editable*/}
+        {/*    title="Органы кроветворения и иммуногенеза"*/}
+        {/*    type="subsection"*/}
+        {/*  >*/}
+        {/*    <GistaItem />*/}
+        {/*    <GistaItem />*/}
+        {/*    <GistaItem />*/}
+        {/*  </Collapse>*/}
+        {/*</Collapse>*/}
       </div>
       {addGistaModalActive && (
         <Modal
@@ -142,6 +228,7 @@ const EditPage = () => {
           setActive={setAddSectionModalActive}
           title="Добавить раздел"
           active={addSectionModalActive}
+          onAddButton={handleAddSubSection}
         >
           <Select
             placeholder="Основной раздел"
@@ -178,11 +265,11 @@ const EditPage = () => {
             onChange={setSelectedOption}
             options={options}
           />
-          <CustomSelect id="1" name="Основной раздел" data={mainSections} />
+          {/*<CustomSelect id="1" name="Основной раздел" data={mainSections} />*/}
           <TextInput
             placeholder="Название подраздела"
-            value={gistaName}
-            setValue={setGistaName}
+            value={newSubSectionName}
+            setValue={setNewSubSectionName}
             type="text"
           />
         </Modal>

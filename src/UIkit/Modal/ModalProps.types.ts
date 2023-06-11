@@ -5,6 +5,8 @@ interface ModalProps {
   children: React.ReactNode;
   title: string;
   setActive: Dispatch<SetStateAction<boolean>>;
+  onAddButton?: () => void;
+  onCancelButton?: () => void;
 }
 
 export default ModalProps;
