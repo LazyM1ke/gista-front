@@ -7,6 +7,8 @@ interface CollapseProps {
   type: "section" | "subsection";
   editable?: boolean;
   isEditPosition?: boolean;
+  onEditClick?: () => void;
+  onDeleteClick?: () => void;
 }
 
 export default CollapseProps;

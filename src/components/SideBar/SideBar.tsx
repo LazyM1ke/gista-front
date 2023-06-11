@@ -2,7 +2,7 @@ import Icon from "../../UIkit/Icon";
 import { IconNameTypes } from "../../UIkit/Icon/IconPaths";
 import Typography from "../../UIkit/Typography";
 import "./SideBar.scss";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 type IMenuItem = {

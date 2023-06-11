@@ -1,8 +1,7 @@
 import Icon from "../../UIkit/Icon";
 import TextInput from "../../UIkit/Input/TextInput/TextInput";
+import logo from "../../UIkit/Logo/Logo";
 import Modal from "../../UIkit/Modal/Modal";
-import CustomSelect from "../../UIkit/Select/Select";
-import { SelectItem } from "../../UIkit/Select/SelectProps.types";
 import Typography from "../../UIkit/Typography";
 import Collapse from "../../components/Collapse/Collapse";
 import GistaItem from "../../components/GistaItem/GistaItem";
@@ -43,6 +42,10 @@ interface addSubSectionResponseData {
   id: string;
   name: string;
   parent_id: string;
+  status: string;
+}
+
+interface deleteSubSectionResponseData {
   status: string;
 }
 
@@ -94,7 +97,7 @@ const EditPage = () => {
           setNewSubSectionName("");
           setAddSectionModalActive(false);
         } else {
-          alert("Ошибка !");
+          alert("Подраздел с таким названием уже существует !");
         }
       });
   };
@@ -110,6 +113,27 @@ const EditPage = () => {
         setSubSections(data.subsections);
       });
   }, []);
+
+  const handleDeleteSubSection = (subSectionId: string) => {
+    const updatedSubSections = subSections.filter(
+      (subSection) => subSection.id !== subSectionId
+    );
+    setSubSections(updatedSubSections);
+    axios
+      .delete<deleteSubSectionResponseData>(
+        `${import.meta.env.VITE_API_URL}/api/section`,
+        {
+          data: {
+            id: subSectionId,
+          },
+        }
+      )
+      .then((response) => {
+        response.data.status === "success"
+          ? alert("Подраздел успешно удален =)")
+          : alert("Произошла ошибка при удалении подраздела !");
+      });
+  };
 
   return (
     <div className="edit-page">
@@ -150,6 +174,11 @@ const EditPage = () => {
                 subsection.parent_id === section.id && (
                   <>
                     <Collapse
+                      onDeleteClick={() =>
+                        handleDeleteSubSection(subsection.id)
+                      }
+                      isEditPosition={isEditPosition}
+                      editable
                       key={subsection.id}
                       title={subsection.name}
                       type="subsection"
@@ -164,44 +193,6 @@ const EditPage = () => {
             )}
           </Collapse>
         ))}
-        {/*<Collapse type="section" title="Общая гистология">*/}
-        {/*  <GistaItem editable />*/}
-        {/*  <GistaItem editable />*/}
-        {/*  <GistaItem editable />*/}
-        {/*  <GistaItem editable />*/}
-        {/*</Collapse>*/}
-        {/*<Collapse type="section" title="Частная гистология">*/}
-        {/*  <Collapse*/}
-        {/*    isEditPosition={isEditPosition}*/}
-        {/*    editable*/}
-        {/*    title="Органы кроветворения и иммуногенеза"*/}
-        {/*    type="subsection"*/}
-        {/*  >*/}
-        {/*    <GistaItem />*/}
-        {/*    <GistaItem />*/}
-        {/*    <GistaItem />*/}
-        {/*  </Collapse>*/}
-        {/*  <Collapse*/}
-        {/*    isEditPosition={isEditPosition}*/}
-        {/*    editable*/}
-        {/*    title="Органы кроветворения и иммуногенеза"*/}
-        {/*    type="subsection"*/}
-        {/*  >*/}
-        {/*    <GistaItem />*/}
-        {/*    <GistaItem />*/}
-        {/*    <GistaItem />*/}
-        {/*  </Collapse>*/}
-        {/*  <Collapse*/}
-        {/*    isEditPosition={isEditPosition}*/}
-        {/*    editable*/}
-        {/*    title="Органы кроветворения и иммуногенеза"*/}
-        {/*    type="subsection"*/}
-        {/*  >*/}
-        {/*    <GistaItem />*/}
-        {/*    <GistaItem />*/}
-        {/*    <GistaItem />*/}
-        {/*  </Collapse>*/}
-        {/*</Collapse>*/}
       </div>
       {addGistaModalActive && (
         <Modal

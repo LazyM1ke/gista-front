@@ -12,6 +12,8 @@ const Collapse = ({
   type,
   isEditPosition = false,
   editable = false,
+  onEditClick,
+  onDeleteClick,
 }: CollapseProps) => {
   const [isOpened, setIsOpened] = useState<boolean>(false);
   const [hover, setHover] = useState<boolean>(false);
@@ -41,8 +43,8 @@ const Collapse = ({
           <div className="collapse__icons">
             {hover && editable && (
               <>
-                <Icon iconName="edit" />
-                <Icon iconName="trash" />
+                <Icon onClick={onEditClick} iconName="edit" />
+                <Icon onClick={onDeleteClick} iconName="trash" />
               </>
             )}
             <Icon

@@ -3,6 +3,7 @@ import { IconNameTypes } from "./IconPaths";
 
 interface IconProps {
   className?: string;
+  onClick?: () => void;
 
   iconName: IconNameTypes;
   size?: number;
