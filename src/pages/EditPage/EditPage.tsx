@@ -8,6 +8,7 @@ import GistaItem from "../../components/GistaItem/GistaItem";
 import {
   getSectionsDataResponse,
   sectionsState,
+  SubSection,
   subSectionsState,
 } from "../MainPage/MainPage";
 import "./EditPage.scss";
@@ -57,8 +58,15 @@ const EditPage = () => {
     useState<boolean>(false);
   const [addSectionModalActive, setAddSectionModalActive] =
     useState<boolean>(false);
+  const [updateSectionModalActive, setUpdateSectionModalActive] =
+    useState<boolean>(false);
 
   const [selectedOption, setSelectedOption] = useState<selectOption | null>(
+    null
+  );
+
+  const [editSubSectionName, setEditSubSectionName] = useState<string>("");
+  const [editedSubSection, setEditedSubSection] = useState<SubSection | null>(
     null
   );
 
@@ -135,6 +143,37 @@ const EditPage = () => {
       });
   };
 
+  const handleEditSubSection = (subsection: SubSection) => {
+    setEditedSubSection(subsection);
+    setEditSubSectionName(subsection.name);
+    setUpdateSectionModalActive(true);
+  };
+
+  const handleUpdateSubSectionName = () => {
+    axios
+      .put<deleteSubSectionResponseData>(
+        `${import.meta.env.VITE_API_URL}/api/section`,
+        {
+          id: editedSubSection?.id,
+          new_name: editSubSectionName,
+        }
+      )
+      .then((response) => {
+        setUpdateSectionModalActive(false);
+        if (response.data.status === "success") {
+          axios
+            .get<getSectionsDataResponse>(
+              `${import.meta.env.VITE_API_URL}/api/section`
+            )
+            .then((response) => {
+              const { data } = response;
+              setSections(data.sections);
+              setSubSections(data.subsections);
+            });
+        }
+      });
+  };
+
   return (
     <div className="edit-page">
       <div className="edit-page__header">
@@ -177,6 +216,7 @@ const EditPage = () => {
                       onDeleteClick={() =>
                         handleDeleteSubSection(subsection.id)
                       }
+                      onEditClick={() => handleEditSubSection(subsection)}
                       isEditPosition={isEditPosition}
                       editable
                       key={subsection.id}
@@ -196,6 +236,7 @@ const EditPage = () => {
       </div>
       {addGistaModalActive && (
         <Modal
+          mainButtonTitle="Добавить"
           setActive={setAddGistaModalActive}
           title="Добавить препарат"
           active={addGistaModalActive}
@@ -216,6 +257,7 @@ const EditPage = () => {
       )}
       {addSectionModalActive && (
         <Modal
+          mainButtonTitle="Добавить"
           setActive={setAddSectionModalActive}
           title="Добавить раздел"
           active={addSectionModalActive}
@@ -261,6 +303,22 @@ const EditPage = () => {
             placeholder="Название подраздела"
             value={newSubSectionName}
             setValue={setNewSubSectionName}
+            type="text"
+          />
+        </Modal>
+      )}
+      {updateSectionModalActive && (
+        <Modal
+          onAddButton={handleUpdateSubSectionName}
+          mainButtonTitle="Сохранить"
+          setActive={setUpdateSectionModalActive}
+          title="Изменить название подраздела"
+          active={updateSectionModalActive}
+        >
+          <TextInput
+            placeholder="Название подраздела"
+            value={editSubSectionName}
+            setValue={setEditSubSectionName}
             type="text"
           />
         </Modal>

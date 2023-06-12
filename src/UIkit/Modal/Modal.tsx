@@ -12,6 +12,7 @@ const Modal = ({
   setActive,
   onAddButton,
   onCancelButton,
+  mainButtonTitle,
 }: ModalProps) => {
   return (
     <div className={active ? "modal active" : "modal"}>
@@ -32,7 +33,7 @@ const Modal = ({
           </Typography>
           {children}
           <div className="modal__btns">
-            <Button onClick={onAddButton}>Добавить</Button>
+            <Button onClick={onAddButton}>{mainButtonTitle}</Button>
             <Button onClick={onCancelButton} type="borderless">
               Отмена
             </Button>

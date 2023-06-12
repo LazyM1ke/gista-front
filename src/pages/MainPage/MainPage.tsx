@@ -5,12 +5,12 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { atom, useRecoilState } from "recoil";
 
-interface Section {
+export interface Section {
   id: string;
   name: string;
 }
 
-interface SubSection {
+export interface SubSection {
   id: string;
   name: string;
   parent_id: string;

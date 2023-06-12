@@ -7,6 +7,7 @@ interface ModalProps {
   setActive: Dispatch<SetStateAction<boolean>>;
   onAddButton?: () => void;
   onCancelButton?: () => void;
+  mainButtonTitle: string;
 }
 
 export default ModalProps;
