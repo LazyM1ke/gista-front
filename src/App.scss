@@ -1,14 +1,3 @@
-@import "src/assets/styles/main";
-
 .app {
   height: 100%;
-  width: 100%;
-  @include flexible($fd: column);
-  overflow: hidden;
-
-  &__content {
-    height: 100%;
-    width: 100%;
-    @include flexible($fd: row);
-  }
 }

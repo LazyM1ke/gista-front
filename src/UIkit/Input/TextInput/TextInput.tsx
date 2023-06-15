@@ -43,7 +43,7 @@ const TextInput = ({
         <Typography
           className="text-input__hint-text"
           variant="text-14"
-          color="#787878"
+          color="#E32727"
         >
           {hintText}
         </Typography>

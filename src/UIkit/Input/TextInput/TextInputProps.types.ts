@@ -6,7 +6,7 @@ interface TextInputProps {
   className?: string;
   setValue: React.Dispatch<SetStateAction<string>>;
   label?: string;
-  hintText?: string;
+  hintText?: string | null;
   type: HTMLInputTypeAttribute;
 }
 

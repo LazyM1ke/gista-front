@@ -1,0 +1,12 @@
+@import "src/assets/styles/main";
+.layout {
+  height: 100%;
+  width: 100%;
+  @include flexible($fd: column);
+  overflow: hidden;
+  &__content {
+    height: 100%;
+    width: 100%;
+    @include flexible($fd: row);
+  }
+}
