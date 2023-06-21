@@ -3,8 +3,8 @@ import TextInput from "../../UIkit/Input/TextInput/TextInput";
 import Typography from "../../UIkit/Typography";
 import MacImage from "../../assets/images/imac.png";
 import Header from "../../components/Header/Header";
+import AuthService from "../../services/AuthService";
 import "./AuthPage.scss";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { atom, useSetRecoilState } from "recoil";
@@ -18,7 +18,6 @@ interface AuthResponseData {
 }
 
 export interface User {
-  refresh: string;
   access: string;
   isStaff: boolean;
   isLogged: boolean;
@@ -28,7 +27,6 @@ export const userState = atom<User>({
   key: "user",
   default: {
     isLogged: false,
-    refresh: "",
     access: "",
     isStaff: false,
   },
@@ -46,30 +44,22 @@ const AuthPage = () => {
     setScreenWidth(window.innerWidth);
   }, [screenWidth]);
 
-  const handleAuth = () => {
+  const handleAuth = async () => {
     setErrorMessage(null);
-    axios
-      .post<AuthResponseData>(`${import.meta.env.VITE_API_URL}/api/auth`, {
-        username: username,
-        password: password,
-      })
-      .then((response) => {
-        if (response.data.status === "failure") {
-          response.data.message && setErrorMessage(response.data.message);
-        }
-        if (response.data.status === "success") {
-          localStorage.setItem("refresh", response.data.refresh);
-          localStorage.setItem("access", response.data.access);
-          localStorage.setItem("user", username);
-          setUserState({
-            access: response.data.access,
-            refresh: response.data.refresh,
-            isStaff: response.data.is_staff,
-            isLogged: true,
-          });
-          navigate("/");
-        }
+
+    const response = await AuthService.login(username, password);
+    if (response.data.status === "failure") {
+      response.data.message && setErrorMessage(response.data.message);
+    }
+    if (response.data.status === "success") {
+      localStorage.setItem("token", response.data.access);
+      setUserState({
+        access: response.data.access,
+        isStaff: response.data.is_staff,
+        isLogged: true,
       });
+      navigate("/");
+    }
   };
 
   if (screenWidth <= 550) {

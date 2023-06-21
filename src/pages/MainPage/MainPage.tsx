@@ -1,5 +1,9 @@
 import Collapse from "../../components/Collapse/Collapse";
 import GistaItem from "../../components/GistaItem/GistaItem";
+import SectionService from "../../services/SectionService";
+import { API_URL } from "../../services/api";
+import { AuthResponse } from "../../services/models/AuthResponse";
+import { Section, SubSection } from "../../services/models/SectionsResponse";
 import { userState } from "../AuthPage/AuthPage";
 import "./MainPage.scss";
 import axios from "axios";
@@ -7,20 +11,6 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { atom, useRecoilState, useRecoilValue } from "recoil";
 
-export interface Section {
-  id: string;
-  name: string;
-}
-
-export interface SubSection {
-  id: string;
-  name: string;
-  parent_id: string;
-}
-export interface getSectionsDataResponse {
-  sections: Section[];
-  subsections: SubSection[];
-}
 export const sectionsState = atom<Section[]>({
   key: "Sections",
   default: [],
@@ -35,27 +25,34 @@ const MainPage = () => {
   const navigate = useNavigate();
   const [sections, setSections] = useRecoilState(sectionsState);
   const [subSections, setSubSections] = useRecoilState(subSectionsState);
-  console.log(typeof localStorage.getItem("access"));
+  const getSections = async () => {
+    try {
+      const response = await SectionService.fetchSections();
+      setSections(response.data.sections);
+      setSubSections(response.data.subsections);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const checkAuth = async () => {
+    try {
+      const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {
+        withCredentials: true,
+      });
+      localStorage.setItem("token", response.data.access);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   useEffect(() => {
-    if (localStorage.getItem("user")) {
-      axios
-        .get<getSectionsDataResponse>(
-          `${import.meta.env.VITE_API_URL}/api/section`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("access")}`,
-            },
-          }
-        )
-        .then((response) => {
-          const { data } = response;
-          setSections(data.sections);
-          setSubSections(data.subsections);
-        });
+    if (localStorage.getItem("token")) {
+      checkAuth();
     } else {
       navigate("/auth");
     }
+    getSections();
   }, []);
 
   return (
