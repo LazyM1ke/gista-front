@@ -1,12 +1,12 @@
-import api from "./api";
+import { API_URL } from "./api";
 import { AuthResponse } from "./models/AuthResponse";
-import { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 
 export default class AuthService {
   static async login(
     username: string,
     password: string
   ): Promise<AxiosResponse<AuthResponse>> {
-    return api.post<AuthResponse>("/auth", { username, password });
+    return axios.post<AuthResponse>(`${API_URL}/auth`, { username, password });
   }
 }

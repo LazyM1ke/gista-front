@@ -1,16 +1,11 @@
 import Icon from "../../UIkit/Icon";
 import TextInput from "../../UIkit/Input/TextInput/TextInput";
-import logo from "../../UIkit/Logo/Logo";
 import Modal from "../../UIkit/Modal/Modal";
 import Typography from "../../UIkit/Typography";
 import Collapse from "../../components/Collapse/Collapse";
 import GistaItem from "../../components/GistaItem/GistaItem";
-import {
-  getSectionsDataResponse,
-  sectionsState,
-  SubSection,
-  subSectionsState,
-} from "../MainPage/MainPage";
+import { SubSection } from "../../services/models/SectionsResponse";
+import { sectionsState, subSectionsState } from "../MainPage/MainPage";
 import "./EditPage.scss";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
@@ -111,15 +106,15 @@ const EditPage = () => {
   };
 
   useEffect(() => {
-    axios
-      .get<getSectionsDataResponse>(
-        `${import.meta.env.VITE_API_URL}/api/section`
-      )
-      .then((response) => {
-        const { data } = response;
-        setSections(data.sections);
-        setSubSections(data.subsections);
-      });
+    // axios
+    //   .get<getSectionsDataResponse>(
+    //     `${import.meta.env.VITE_API_URL}/api/section`
+    //   )
+    //   .then((response) => {
+    //     const { data } = response;
+    //     setSections(data.sections);
+    //     setSubSections(data.subsections);
+    //   });
   }, []);
 
   const handleDeleteSubSection = (subSectionId: string) => {
@@ -160,17 +155,17 @@ const EditPage = () => {
       )
       .then((response) => {
         setUpdateSectionModalActive(false);
-        if (response.data.status === "success") {
-          axios
-            .get<getSectionsDataResponse>(
-              `${import.meta.env.VITE_API_URL}/api/section`
-            )
-            .then((response) => {
-              const { data } = response;
-              setSections(data.sections);
-              setSubSections(data.subsections);
-            });
-        }
+        // if (response.data.status === "success") {
+        //   axios
+        //     .get<getSectionsDataResponse>(
+        //       `${import.meta.env.VITE_API_URL}/api/section`
+        //     )
+        //     .then((response) => {
+        //       const { data } = response;
+        //       setSections(data.sections);
+        //       setSubSections(data.subsections);
+        //     });
+        // }
       });
   };
 

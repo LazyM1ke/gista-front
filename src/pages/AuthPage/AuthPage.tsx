@@ -9,14 +9,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { atom, useSetRecoilState } from "recoil";
 
-interface AuthResponseData {
-  status: string;
-  refresh: string;
-  access: string;
-  is_staff: boolean;
-  message?: string;
-}
-
 export interface User {
   access: string;
   isStaff: boolean;
