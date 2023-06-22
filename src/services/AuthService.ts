@@ -1,4 +1,4 @@
-import { API_URL } from "./api";
+import api, { API_URL } from "./api";
 import { AuthResponse } from "./models/AuthResponse";
 import axios, { AxiosResponse } from "axios";
 

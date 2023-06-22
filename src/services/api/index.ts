@@ -1,5 +1,6 @@
 import { AuthResponse } from "../models/AuthResponse";
 import axios from "axios";
+import { redirect, useNavigate } from "react-router-dom";
 
 export const API_URL = import.meta.env.VITE_API_URL;
 
@@ -12,7 +13,6 @@ api.interceptors.request.use((config) => {
   config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
   return config;
 });
-
 api.interceptors.response.use(
   (config) => {
     return config;
@@ -26,16 +26,18 @@ api.interceptors.response.use(
     ) {
       originalRequest._isRetry = true;
       try {
-        const response = await axios.get<AuthResponse>(
-          `${API_URL}/token/refresh`,
-          {
-            withCredentials: true,
-          }
-        );
-        localStorage.setItem("token", response.data.access);
-        return api.request(originalRequest);
+        // const response = await axios.get<AuthResponse>(
+        //   `${API_URL}/token/refresh`,
+        //   {
+        //     withCredentials: true,
+        //   }
+        // );
+        // localStorage.setItem("token", response.data.access);
+
+        // return api.request(originalRequest);
+        return localStorage.clear();
       } catch (e) {
-        console.log("ПОЛЬЗОВАТЕЛЬ НЕ АВТОРИЗОВАН!");
+        console.log("ПОЛЬЗОВАТЕЛЬ НЕ АВТОРИЗОВАН!", e);
       }
     }
     throw error;

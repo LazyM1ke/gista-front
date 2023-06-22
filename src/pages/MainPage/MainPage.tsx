@@ -36,6 +36,12 @@ const MainPage = () => {
     getSections();
   }, []);
 
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/auth");
+    }
+  }, [localStorage.getItem("token")]);
+
   return (
     <div className="main-page">
       {sections.map((section) => (
