@@ -1,6 +1,5 @@
 import { AuthResponse } from "../models/AuthResponse";
 import axios from "axios";
-import { redirect, useNavigate } from "react-router-dom";
 
 export const API_URL = import.meta.env.VITE_API_URL;
 
@@ -26,16 +25,15 @@ api.interceptors.response.use(
     ) {
       originalRequest._isRetry = true;
       try {
-        // const response = await axios.get<AuthResponse>(
-        //   `${API_URL}/token/refresh`,
-        //   {
-        //     withCredentials: true,
-        //   }
-        // );
-        // localStorage.setItem("token", response.data.access);
+        const response = await axios.get<AuthResponse>(
+          `${API_URL}/token/refresh`,
+          {
+            withCredentials: true,
+          }
+        );
+        localStorage.setItem("token", response.data.access);
 
-        // return api.request(originalRequest);
-        return localStorage.clear();
+        return api.request(originalRequest);
       } catch (e) {
         console.log("ПОЛЬЗОВАТЕЛЬ НЕ АВТОРИЗОВАН!", e);
       }
