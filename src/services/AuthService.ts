@@ -7,6 +7,10 @@ export default class AuthService {
     username: string,
     password: string
   ): Promise<AxiosResponse<AuthResponse>> {
-    return axios.post<AuthResponse>(`${API_URL}/auth`, { username, password });
+    return axios.post<AuthResponse>(
+      `${API_URL}/auth`,
+      { username, password },
+      { withCredentials: true }
+    );
   }
 }
