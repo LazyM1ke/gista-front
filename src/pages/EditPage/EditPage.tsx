@@ -4,6 +4,7 @@ import Modal from "../../UIkit/Modal/Modal";
 import Typography from "../../UIkit/Typography";
 import Collapse from "../../components/Collapse/Collapse";
 import GistaItem from "../../components/GistaItem/GistaItem";
+import SectionService from "../../services/SectionService";
 import { SubSection } from "../../services/models/SectionsResponse";
 import { sectionsState, subSectionsState } from "../MainPage/MainPage";
 import "./EditPage.scss";
@@ -32,17 +33,6 @@ import { useRecoilState, useRecoilValue } from "recoil";
 interface selectOption {
   value: string;
   label: string;
-}
-
-interface addSubSectionResponseData {
-  id: string;
-  name: string;
-  parent_id: string;
-  status: string;
-}
-
-interface deleteSubSectionResponseData {
-  status: string;
 }
 
 const EditPage = () => {
@@ -77,15 +67,16 @@ const EditPage = () => {
   const [isEditPosition, setIsEditPosition] = useState<boolean>(false);
 
   const handleAddSubSection = () => {
-    axios
-      .post<addSubSectionResponseData>(
-        `${import.meta.env.VITE_API_URL}/api/section`,
-        {
-          name: newSubSectionName,
-          parent_id: selectedOption?.value,
-        }
-      )
-      .then((response) => {
+    // axios
+    //   .post<addSubSectionResponseData>(
+    //     `${import.meta.env.VITE_API_URL}/api/section`,
+    //     {
+    //       name: newSubSectionName,
+    //       parent_id: selectedOption?.value,
+    //     }
+    //   )
+    SectionService.addSubSection(newSubSectionName, selectedOption?.value).then(
+      (response) => {
         const { data } = response;
         setSubSections([
           ...subSections,
@@ -102,7 +93,8 @@ const EditPage = () => {
         } else {
           alert("Подраздел с таким названием уже существует !");
         }
-      });
+      }
+    );
   };
 
   useEffect(() => {
@@ -122,20 +114,11 @@ const EditPage = () => {
       (subSection) => subSection.id !== subSectionId
     );
     setSubSections(updatedSubSections);
-    axios
-      .delete<deleteSubSectionResponseData>(
-        `${import.meta.env.VITE_API_URL}/api/section`,
-        {
-          data: {
-            id: subSectionId,
-          },
-        }
-      )
-      .then((response) => {
-        response.data.status === "success"
-          ? alert("Подраздел успешно удален =)")
-          : alert("Произошла ошибка при удалении подраздела !");
-      });
+    SectionService.deleteSubSection(subSectionId).then((response) => {
+      response.data.status === "success"
+        ? alert("Подраздел успешно удален =)")
+        : alert("Произошла ошибка при удалении подраздела !");
+    });
   };
 
   const handleEditSubSection = (subsection: SubSection) => {
@@ -145,28 +128,23 @@ const EditPage = () => {
   };
 
   const handleUpdateSubSectionName = () => {
-    axios
-      .put<deleteSubSectionResponseData>(
-        `${import.meta.env.VITE_API_URL}/api/section`,
-        {
-          id: editedSubSection?.id,
-          new_name: editSubSectionName,
-        }
-      )
-      .then((response) => {
-        setUpdateSectionModalActive(false);
-        // if (response.data.status === "success") {
-        //   axios
-        //     .get<getSectionsDataResponse>(
-        //       `${import.meta.env.VITE_API_URL}/api/section`
-        //     )
-        //     .then((response) => {
-        //       const { data } = response;
-        //       setSections(data.sections);
-        //       setSubSections(data.subsections);
-        //     });
-        // }
-      });
+    SectionService.updateSubSection(
+      editedSubSection?.id,
+      editSubSectionName
+    ).then((response) => {
+      setUpdateSectionModalActive(false);
+      // if (response.data.status === "success") {
+      //   axios
+      //     .get<getSectionsDataResponse>(
+      //       `${import.meta.env.VITE_API_URL}/api/section`
+      //     )
+      //     .then((response) => {
+      //       const { data } = response;
+      //       setSections(data.sections);
+      //       setSubSections(data.subsections);
+      //     });
+      // // }
+    });
   };
 
   return (

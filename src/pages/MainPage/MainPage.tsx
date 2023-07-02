@@ -22,11 +22,12 @@ const MainPage = () => {
   const navigate = useNavigate();
   const [sections, setSections] = useRecoilState(sectionsState);
   const [subSections, setSubSections] = useRecoilState(subSectionsState);
-  const getSections = async () => {
+  const getSections = () => {
     try {
-      const response = await SectionService.fetchSections();
-      setSections(response.data.sections);
-      setSubSections(response.data.subsections);
+      SectionService.fetchSections().then((response) => {
+        setSections(response.data.sections);
+        setSubSections(response.data.subsections);
+      });
     } catch (e) {
       console.log(e);
     }
