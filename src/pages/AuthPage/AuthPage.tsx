@@ -124,10 +124,14 @@ const AuthPage = () => {
     <div className="auth-page__wrapper">
       <Header>
         <>
-          <Button size="medium" type="primary">
+          <Button onClick={() => navigate("/reg")} size="medium" type="primary">
             Зарегистрироваться
           </Button>
-          <Button size="medium" type="secondary">
+          <Button
+            onClick={() => navigate("/auth")}
+            size="medium"
+            type="secondary"
+          >
             Войти
           </Button>
         </>

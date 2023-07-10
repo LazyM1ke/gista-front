@@ -1,0 +1,11 @@
+@import "src/assets/styles/main";
+
+.third-step {
+  @include flexible($fd: column, $ai: center);
+  gap: 16px;
+  &__inputs {
+    width: 100%;
+    @include flexible($fd: row, $ai: center, $jc:space-between);
+    gap: 10px;
+  }
+}
