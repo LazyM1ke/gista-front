@@ -1,7 +1,9 @@
 import TextInput from "../../../../../UIkit/Input/TextInput/TextInput";
 import React, { useState } from "react";
+import Button from "../../../../../UIkit/Button";
+import StepProps from "../StepProsp.types";
 
-const FirstStep = () => {
+const FirstStep = ({setStep}: StepProps) => {
   const [surname, setSurname] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [patronymic, setPatronymic] = useState<string>("");
@@ -25,6 +27,9 @@ const FirstStep = () => {
         setValue={setPatronymic}
         placeholder="Отчество"
       />
+        <Button size="large" fullWidth onClick={() => setStep(2)}>
+         Продолжить
+        </Button>
     </div>
   );
 };
