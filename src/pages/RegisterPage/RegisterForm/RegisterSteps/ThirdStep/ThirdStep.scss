@@ -9,3 +9,19 @@
     gap: 10px;
   }
 }
+.code {
+  &-container {
+    width: 100%;
+    @include flexible($fd: row, $ai: center, $jc:space-between);
+    gap: 10px;
+  }
+  width: 40px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #DEDEDE;
+  text-align: center;
+  &:focus {
+    border: 1px solid #007FFF;
+  }
+}
+
