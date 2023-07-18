@@ -5,11 +5,18 @@ import FourthStep from "./RegisterSteps/FourthStep/FourthStep";
 import SecondStep from "./RegisterSteps/SecondStep/SecondStep";
 import ThirdStep from "./RegisterSteps/ThirdStep/ThirdStep";
 import React, { useState } from "react";
+import {useForm} from "react-hook-form";
+import TextInput from "../../../UIkit/Input/TextInput/TextInput";
+import Icon from "../../../UIkit/Icon";
+import Button from "../../../UIkit/Button";
 
 export type RegisterStep = 1 | 2 | 3 | 4;
 
 const RegisterForm = () => {
+  const [password, setPassword] = useState<string>('')
+  const [confirmPassword, setConfirmPassword] = useState<string>('')
   const [step, setStep] = useState<RegisterStep>(1);
+  const {register, handleSubmit} = useForm()
 
   const steps = [1, 2, 3, 4];
   const getStep = () => {

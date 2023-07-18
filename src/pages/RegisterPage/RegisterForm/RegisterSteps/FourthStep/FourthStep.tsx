@@ -5,7 +5,6 @@ import "./FourthStep.scss";
 import React, { useState } from "react";
 import Button from "../../../../../UIkit/Button";
 import {useNavigate} from "react-router-dom";
-
 const FourthStep = () => {
   const navigate = useNavigate()
   const [password, setPassword] = useState<string>("");
