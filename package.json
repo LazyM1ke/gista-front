@@ -11,12 +11,14 @@
     "host": "vite --host"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
     "react": "^18.2.0",
     "react-auth-code-input": "^3.2.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.1",
+    "react-redux": "^8.1.1",
     "react-router-dom": "^6.11.2",
     "react-select": "^5.7.3",
     "recoil": "^0.7.7",
