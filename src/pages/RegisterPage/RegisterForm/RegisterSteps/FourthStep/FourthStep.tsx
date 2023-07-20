@@ -6,7 +6,6 @@ import React, { useState } from "react";
 import Button from "../../../../../UIkit/Button";
 import {useNavigate} from "react-router-dom";
 const FourthStep = () => {
-  const navigate = useNavigate()
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
 
@@ -54,9 +53,6 @@ const FourthStep = () => {
         setValue={setConfirmPassword}
         type="password"
       />
-      <Button size="large" fullWidth onClick={() => navigate('/auth')}>
-        Зарегистрироваться
-      </Button>
     </div>
   );
 };

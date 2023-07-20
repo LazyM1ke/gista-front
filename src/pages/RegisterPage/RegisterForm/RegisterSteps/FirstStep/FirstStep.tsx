@@ -1,14 +1,14 @@
 import TextInput from "../../../../../UIkit/Input/TextInput/TextInput";
 import React, { useState } from "react";
-import Button from "../../../../../UIkit/Button";
-import StepProps from "../StepProsp.types";
+import './FirstStep.scss'
 
-const FirstStep = ({setStep}: StepProps) => {
+const FirstStep = () => {
   const [surname, setSurname] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [patronymic, setPatronymic] = useState<string>("");
+
   return (
-    <div className="auth-page__form__inputs">
+    <div className="first-step">
       <TextInput
         type="text"
         value={surname}
@@ -27,9 +27,6 @@ const FirstStep = ({setStep}: StepProps) => {
         setValue={setPatronymic}
         placeholder="Отчество"
       />
-        <Button size="large" fullWidth onClick={() => setStep(2)}>
-         Продолжить
-        </Button>
     </div>
   );
 };
