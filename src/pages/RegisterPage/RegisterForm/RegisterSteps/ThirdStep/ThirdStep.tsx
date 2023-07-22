@@ -6,7 +6,7 @@ import AuthCode from "react-auth-code-input";
 const ThirdStep = () => {
     const [code, setCode] = useState<string>('');
   return (
-    <div className="third-step">
+    <form className="third-step">
       <div className="third-step__title">
         <Typography variant="text-16">
           На адрес sense.nessa@gmail.com выслан код подтверждения. Проверьте
@@ -16,7 +16,7 @@ const ThirdStep = () => {
       <div className="third-step__inputs">
           <AuthCode containerClassName='code-container' inputClassName='code' allowedCharacters='numeric' onChange={res => setCode(res)} />
       </div>
-    </div>
+    </form>
   );
 };
 

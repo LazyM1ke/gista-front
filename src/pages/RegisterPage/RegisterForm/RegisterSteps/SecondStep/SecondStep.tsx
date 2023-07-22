@@ -5,7 +5,7 @@ const SecondStep = () => {
   const [phone, setPhone] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   return (
-    <div className="second-step">
+    <form className="second-step">
       <TextInput
         type="text"
         value={phone}
@@ -19,7 +19,7 @@ const SecondStep = () => {
         placeholder="E-mail"
       />
 
-    </div>
+    </form>
   );
 };
 

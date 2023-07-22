@@ -1,17 +1,21 @@
+import Button from "../../../../../UIkit/Button";
 import Icon from "../../../../../UIkit/Icon";
 import TextInput from "../../../../../UIkit/Input/TextInput/TextInput";
 import Typography from "../../../../../UIkit/Typography";
 import "./FourthStep.scss";
 import React, { useState } from "react";
-import Button from "../../../../../UIkit/Button";
-import {useNavigate} from "react-router-dom";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+
 const FourthStep = () => {
+  const { register, handleSubmit } = useForm<FieldValues>();
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const onSubmit: SubmitHandler<FieldValues> = (data) => console.log(data);
 
   return (
-    <div className="fourth-step">
+    <form className="fourth-step" onSubmit={handleSubmit(onSubmit)}>
       <TextInput
+        register={register}
         placeholder="Пароль"
         value={password}
         setValue={setPassword}
@@ -53,7 +57,10 @@ const FourthStep = () => {
         setValue={setConfirmPassword}
         type="password"
       />
-    </div>
+      <Button as="submit" size="large" fullWidth>
+        submit
+      </Button>
+    </form>
   );
 };
 

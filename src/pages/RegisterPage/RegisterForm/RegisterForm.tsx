@@ -50,7 +50,7 @@ const RegisterForm = () => {
       buttonText = 'Зарегистрироваться'
       buttonHandler = () => navigate('/auth')
     }
-    return <Button size="large" fullWidth onClick={buttonHandler}>{buttonText}</Button>
+    return <Button as='submit' size="large" fullWidth onClick={buttonHandler}>{buttonText}</Button>
   }, [step])
 
   return (

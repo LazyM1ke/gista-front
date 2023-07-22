@@ -12,6 +12,8 @@ const TextInput = ({
   label,
   hintText,
   type = "text",
+  register,
+  name = "",
 }: TextInputProps) => {
   const TextInputClassName = classNames(
     "text-input",
@@ -34,6 +36,7 @@ const TextInput = ({
         </Typography>
       )}
       <input
+        {...(register ? register(name) : {})}
         onChange={onChangeHandler}
         placeholder={placeholder}
         value={value}
