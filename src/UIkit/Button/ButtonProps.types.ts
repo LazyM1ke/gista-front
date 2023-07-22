@@ -8,6 +8,7 @@ interface ButtonProps {
   className?: string;
   children?: React.ReactNode;
 
+  as?: 'submit' | 'reset' | 'button' | undefined;
   type?: ButtonTypes;
   size?: ButtonSize;
 

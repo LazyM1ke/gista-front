@@ -8,6 +8,7 @@ const Button = ({
   className,
   children = "",
 
+  as = 'button',
   type = "primary",
   size = "medium",
 
@@ -40,7 +41,7 @@ const Button = ({
 
   return (
     <button
-      type="button"
+      type={as}
       className={buttonClassName}
       disabled={disabled}
       onClick={onClick}

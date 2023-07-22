@@ -6,6 +6,7 @@ import EditPage from "./pages/EditPage/EditPage";
 import FavoritesPage from "./pages/FavoritesPage/FavoritesPage";
 import GistaPage from "./pages/GistaPage/GistaPage";
 import MainPage from "./pages/MainPage/MainPage";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import { API_URL } from "./services/api";
 import { AuthResponse } from "./services/models/AuthResponse";
 import axios from "axios";
@@ -46,6 +47,7 @@ const App = () => {
           <Route path="gista" element={<GistaPage />} />
         </Route>
         <Route path="/auth" element={<AuthPage />} />
+        <Route path="/reg" element={<RegisterPage />} />
       </Routes>
     </div>
   );
