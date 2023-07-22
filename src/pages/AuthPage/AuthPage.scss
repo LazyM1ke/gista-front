@@ -9,7 +9,7 @@
   }
   @include flexible($fd: column, $gap: 16px);
   min-height: 100%;
-  background: url("src/assets/images/Gradient.png") no-repeat ;
+  background: url("../../../src/assets/images/Gradient.png") no-repeat ;
   background-size: cover;
   width: 100%;
   //position: relative;

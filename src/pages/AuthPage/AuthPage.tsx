@@ -40,10 +40,10 @@ const AuthPage = () => {
     setErrorMessage(null);
 
     const response = await AuthService.login(username, password);
-    if (response.data.status === "failure") {
+    if (!response.data.success) {
       response.data.message && setErrorMessage(response.data.message);
     }
-    if (response.data.status === "success") {
+    if (response.data.success) {
       localStorage.setItem("token", response.data.access);
       setUserState({
         access: response.data.access,
