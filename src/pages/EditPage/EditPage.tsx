@@ -6,12 +6,16 @@ import Collapse from "../../components/Collapse/Collapse";
 import GistaItem from "../../components/GistaItem/GistaItem";
 import SectionService from "../../services/SectionService";
 import { SubSection } from "../../services/models/SectionsResponse";
-import { sectionsState, subSectionsState } from "../MainPage/MainPage";
+import {
+  addSubsection,
+  deleteSubsection,
+  setSections,
+  setSubsections,
+} from "../../store/Reducers/SectionsReducer/SectionsReducer";
+import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 import "./EditPage.scss";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
-import { useRecoilState, useRecoilValue } from "recoil";
 
 // const mainSections: SelectItem[] = [
 //   {
@@ -36,9 +40,10 @@ interface selectOption {
 }
 
 const EditPage = () => {
-  const [sections, setSections] = useRecoilState(sectionsState);
-  const [subSections, setSubSections] = useRecoilState(subSectionsState);
-
+  const dispatch = useAppDispatch();
+  const { sections, subsections } = useAppSelector(
+    (state) => state.SectionSlice
+  );
   const [addGistaModalActive, setAddGistaModalActive] =
     useState<boolean>(false);
   const [addSectionModalActive, setAddSectionModalActive] =
@@ -67,25 +72,16 @@ const EditPage = () => {
   const [isEditPosition, setIsEditPosition] = useState<boolean>(false);
 
   const handleAddSubSection = () => {
-    // axios
-    //   .post<addSubSectionResponseData>(
-    //     `${import.meta.env.VITE_API_URL}/api/section`,
-    //     {
-    //       name: newSubSectionName,
-    //       parent_id: selectedOption?.value,
-    //     }
-    //   )
     SectionService.addSubSection(newSubSectionName, selectedOption?.value).then(
       (response) => {
         const { data } = response;
-        setSubSections([
-          ...subSections,
-          {
+        dispatch(
+          addSubsection({
             id: data.id,
             name: data.name,
             parent_id: data.parent_id,
-          },
-        ]);
+          })
+        );
         if (data.status === "success") {
           setSelectedOption(null);
           setNewSubSectionName("");
@@ -96,24 +92,24 @@ const EditPage = () => {
       }
     );
   };
+  const getSections = () => {
+    try {
+      SectionService.fetchSections().then((response) => {
+        dispatch(setSections(response.data.sections));
+        dispatch(setSubsections(response.data.subsections));
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   useEffect(() => {
-    // axios
-    //   .get<getSectionsDataResponse>(
-    //     `${import.meta.env.VITE_API_URL}/api/section`
-    //   )
-    //   .then((response) => {
-    //     const { data } = response;
-    //     setSections(data.sections);
-    //     setSubSections(data.subsections);
-    //   });
+    getSections();
   }, []);
 
   const handleDeleteSubSection = (subSectionId: string) => {
-    const updatedSubSections = subSections.filter(
-      (subSection) => subSection.id !== subSectionId
-    );
-    setSubSections(updatedSubSections);
+    dispatch(deleteSubsection(subSectionId));
+
     SectionService.deleteSubSection(subSectionId).then((response) => {
       response.data.status === "success"
         ? alert("Подраздел успешно удален =)")
@@ -181,7 +177,7 @@ const EditPage = () => {
       <div className="edit-page__content">
         {sections.map((section) => (
           <Collapse key={section.id} title={section.name} type="section">
-            {subSections.map(
+            {subsections.map(
               (subsection) =>
                 subsection.parent_id === section.id && (
                   <>

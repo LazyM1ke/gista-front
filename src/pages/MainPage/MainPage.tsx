@@ -1,32 +1,27 @@
 import Collapse from "../../components/Collapse/Collapse";
 import GistaItem from "../../components/GistaItem/GistaItem";
 import SectionService from "../../services/SectionService";
-import { Section, SubSection } from "../../services/models/SectionsResponse";
-import { userState } from "../AuthPage/AuthPage";
+import {
+  setSections,
+  setSubsections,
+} from "../../store/Reducers/SectionsReducer/SectionsReducer";
+import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 import "./MainPage.scss";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { atom, useRecoilState, useRecoilValue } from "recoil";
 
-export const sectionsState = atom<Section[]>({
-  key: "Sections",
-  default: [],
-});
-
-export const subSectionsState = atom<SubSection[]>({
-  key: "SubSections",
-  default: [],
-});
 const MainPage = () => {
-  const user = useRecoilValue(userState);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [sections, setSections] = useRecoilState(sectionsState);
-  const [subSections, setSubSections] = useRecoilState(subSectionsState);
+  const { sections, subsections } = useAppSelector(
+    (state) => state.SectionSlice
+  );
+
   const getSections = () => {
     try {
       SectionService.fetchSections().then((response) => {
-        setSections(response.data.sections);
-        setSubSections(response.data.subsections);
+        dispatch(setSections(response.data.sections));
+        dispatch(setSubsections(response.data.subsections));
       });
     } catch (e) {
       console.log(e);
@@ -47,7 +42,7 @@ const MainPage = () => {
     <div className="main-page">
       {sections.map((section) => (
         <Collapse key={section.id} title={section.name} type="section">
-          {subSections.map(
+          {subsections.map(
             (subsection) =>
               subsection.parent_id === section.id && (
                 <>
