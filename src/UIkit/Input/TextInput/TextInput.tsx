@@ -38,7 +38,7 @@ const TextInput = ({
             variant="text-14"
             color="#E32727"
           >
-            {hintText}
+            {hintText.toString()}
           </Typography>
         </div>
       )}
