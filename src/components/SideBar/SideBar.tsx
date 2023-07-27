@@ -108,7 +108,13 @@ const SideBar = () => {
             </Typography>
           </div>
         ))}
-        <div className="sidebar__tabs__item">
+        <div
+          className="sidebar__tabs__item"
+          onClick={() => {
+            localStorage.clear();
+            location.reload();
+          }}
+        >
           <Icon iconName="exit" />
           <Typography>Выйти</Typography>
         </div>

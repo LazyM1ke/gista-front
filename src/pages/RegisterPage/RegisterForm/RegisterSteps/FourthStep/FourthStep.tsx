@@ -4,21 +4,21 @@ import TextInput from "../../../../../UIkit/Input/TextInput/TextInput";
 import Typography from "../../../../../UIkit/Typography";
 import "./FourthStep.scss";
 import React, { useState } from "react";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 const FourthStep = () => {
-  const { register, handleSubmit } = useForm<FieldValues>();
-  const [password, setPassword] = useState<string>("");
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const onSubmit: SubmitHandler<FieldValues> = (data) => console.log(data);
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = handleSubmit((data) => {
+    alert(JSON.stringify(data));
+  });
 
   return (
-    <form className="fourth-step" onSubmit={handleSubmit(onSubmit)}>
+    <form className="fourth-step" onSubmit={onSubmit}>
       <TextInput
+        name="password"
         register={register}
         placeholder="Пароль"
-        value={password}
-        setValue={setPassword}
         type="password"
       />
       <div className="fourth-step__validation">
@@ -52,9 +52,9 @@ const FourthStep = () => {
         </div>
       </div>
       <TextInput
+        name="confirmPassword"
+        register={register}
         placeholder="Подтверждение пароля"
-        value={confirmPassword}
-        setValue={setConfirmPassword}
         type="password"
       />
       <Button as="submit" size="large" fullWidth>

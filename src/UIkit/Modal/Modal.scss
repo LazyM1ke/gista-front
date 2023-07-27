@@ -12,7 +12,11 @@
   justify-content: center;
   transition: 0.5s;
 
-
+  & form {
+    width: 100%;
+    @include flexible($fd: column);
+    gap: 16px;
+  }
   &__close {
     @include flexible($fd: row, $jc: flex-end);
   }

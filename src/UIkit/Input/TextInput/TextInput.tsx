@@ -2,31 +2,22 @@ import Typography from "../../Typography";
 import "./TextInput.scss";
 import TextInputProps from "./TextInputProps.types";
 import classNames from "classnames";
-import React, { ChangeEvent, useCallback } from "react";
+import React from "react";
 
 const TextInput = ({
   className,
-  value,
-  setValue,
   placeholder,
   label,
   hintText,
   type = "text",
   register,
   name = "",
+  options,
 }: TextInputProps) => {
   const TextInputClassName = classNames(
     "text-input",
 
     className
-  );
-  const onChangeHandler = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      if (setValue) {
-        setValue(event.target.value);
-      }
-    },
-    [setValue]
   );
   return (
     <div className={TextInputClassName}>
@@ -36,11 +27,9 @@ const TextInput = ({
         </Typography>
       )}
       <input
-        {...(register ? register(name) : {})}
-        onChange={onChangeHandler}
         placeholder={placeholder}
-        value={value}
         type={type}
+        {...(register ? register(name, options) : {})}
       />
       {hintText && (
         <Typography
