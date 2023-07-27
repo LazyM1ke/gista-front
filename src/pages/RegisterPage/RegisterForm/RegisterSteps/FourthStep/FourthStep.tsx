@@ -26,7 +26,7 @@ const FourthStep = () => {
           placeholder="Пароль"
           type="password"
           options={{ required: true }}
-          hintText={errors.password?.message}
+          hintText={errors.password?.message ? errors.password?.message : ""}
         />
         <div className="fourth-step__validation">
           <div className="fourth-step__validation__container">

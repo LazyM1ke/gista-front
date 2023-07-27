@@ -1,9 +1,9 @@
 import { TypographyVariants } from "../../assets/styles/typography/export.scss";
-import { FieldError, FieldErrorsImpl, Merge } from "react-hook-form";
+import { ReactNode } from "react";
 
 interface TypographyProps {
   className?: string;
-  children?: string | FieldError | Merge<FieldError, FieldErrorsImpl<any>>;
+  children?: ReactNode | undefined;
   color?: string;
   variant?: TypographyVariants;
 }

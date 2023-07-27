@@ -1,4 +1,3 @@
-import { getColorAsCSSVariable } from "../../utils/colorUtils";
 import "./Typography.scss";
 import TypographyProps from "./TypographyProps.types";
 import classnames from "classnames";
