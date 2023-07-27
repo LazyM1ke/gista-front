@@ -1,3 +1,4 @@
+import Icon from "../../Icon";
 import Typography from "../../Typography";
 import "./TextInput.scss";
 import TextInputProps from "./TextInputProps.types";
@@ -14,11 +15,7 @@ const TextInput = ({
   name = "",
   options,
 }: TextInputProps) => {
-  const TextInputClassName = classNames(
-    "text-input",
-
-    className
-  );
+  const TextInputClassName = classNames("text-input", className);
   return (
     <div className={TextInputClassName}>
       {label && (
@@ -27,18 +24,23 @@ const TextInput = ({
         </Typography>
       )}
       <input
+        style={hintText ? { border: "1px solid #E32727" } : {}}
         placeholder={placeholder}
         type={type}
         {...(register ? register(name, options) : {})}
+        formNoValidate
       />
       {hintText && (
-        <Typography
-          className="text-input__hint-text"
-          variant="text-14"
-          color="#E32727"
-        >
-          {hintText}
-        </Typography>
+        <div className="text-input__hint-text">
+          <Icon size={16} iconName="infocircle" color="#E32727" />
+          <Typography
+            className="text-input__hint-text"
+            variant="text-14"
+            color="#E32727"
+          >
+            {hintText}
+          </Typography>
+        </div>
       )}
     </div>
   );

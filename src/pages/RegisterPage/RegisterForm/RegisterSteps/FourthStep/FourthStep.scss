@@ -1,8 +1,10 @@
 @import "src/assets/styles/main";
 
 .fourth-step {
-  @include flexible($fd: column);
-  gap: 16px;
+  @include flexible($fd: column, $gap: 32px);
+  &__inputs {
+    @include flexible($fd: column, $gap: 16px);
+  }
   &__validation {
     @include flexible($fd: row, $ai: center, $jc: space-between);
     gap: 26px;

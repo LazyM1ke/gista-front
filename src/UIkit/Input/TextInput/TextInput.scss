@@ -2,6 +2,9 @@
 .text-input {
   @include flexible($fd: column);
   width: 100%;
+  &__hint-text {
+    @include flexible($fd: row, $ai: center, $gap: 4px)
+  }
   input {
     width: 100%;
     padding: 8px 16px;
