@@ -1,11 +1,23 @@
 import { HTMLInputTypeAttribute } from "react";
-import { FieldValues, RegisterOptions, UseFormRegister } from "react-hook-form";
+import {
+  FieldError,
+  FieldErrorsImpl,
+  FieldValues,
+  Merge,
+  RegisterOptions,
+  UseFormRegister,
+} from "react-hook-form";
 
 interface TextInputProps {
   placeholder?: string;
   className?: string;
   label?: string;
-  hintText?: string | null;
+  hintText?:
+    | string
+    | FieldError
+    | Merge<FieldError, FieldErrorsImpl<any>>
+    | undefined
+    | null;
   type: HTMLInputTypeAttribute;
   register?: UseFormRegister<FieldValues>;
   name?: string;

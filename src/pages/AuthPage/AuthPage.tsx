@@ -5,30 +5,44 @@ import MacImage from "../../assets/images/imac.png";
 import Header from "../../components/Header/Header";
 import AuthService from "../../services/AuthService";
 import "./AuthPage.scss";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 const AuthPage = () => {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const navigate = useNavigate();
-
   const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>("");
 
   useEffect(() => {
     setScreenWidth(window.innerWidth);
   }, [screenWidth]);
 
   const onSubmit = handleSubmit(async (data) => {
-    const response = await AuthService.login(data.username, data.password);
-    if (!response.data.success) {
-      response.data.message && setErrorMessage(response.data.message);
-    }
-    if (response.data.success) {
-      localStorage.setItem("token", response.data.access);
-      navigate("/");
+    try {
+      const response = await AuthService.login(data.username, data.password);
+      if (!response.data.success) {
+        response.data.message && setErrorMessage(response.data.message);
+      }
+      if (response.data.success) {
+        localStorage.setItem("token", response.data.access);
+        navigate("/");
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          setErrorMessage(error.response.data.message);
+        }
+      } else {
+        console.error(error);
+      }
     }
   });
 
@@ -59,7 +73,7 @@ const AuthPage = () => {
                   type="password"
                   className="auth-page__form__input"
                   placeholder="Пароль"
-                  hintText={errorMessage}
+                  // hintText={errorMessage}
                 />
                 <Typography
                   className="auth-page__form__forgot"
@@ -144,15 +158,32 @@ const AuthPage = () => {
                   className="auth-page__form__input"
                   name="username"
                   register={register}
+                  options={{
+                    required: {
+                      value: true,
+                      message: `Поле "Имя пользователя" является обязательным`,
+                    },
+                  }}
                   placeholder="Имя пользователя"
+                  hintText={errors.username?.message}
                 />
                 <TextInput
                   type="password"
                   className="auth-page__form__input"
                   name="password"
                   register={register}
+                  options={{
+                    required: {
+                      value: true,
+                      message: `Поле "Пароль" является обязательным`,
+                    },
+                  }}
                   placeholder="Пароль"
-                  hintText={errorMessage}
+                  hintText={
+                    errors.password?.message
+                      ? errors.password?.message
+                      : errorMessage
+                  }
                 />
               </div>
               <Typography variant="text-14" color="#007FFF">
@@ -164,7 +195,9 @@ const AuthPage = () => {
                 </Button>
                 <div className="auth-page__form__register">
                   <Typography color="#787878">Нет аккаунта?</Typography>
-                  <Typography color="#007FFF">Зарегистрироваться</Typography>
+                  <Button onClick={() => navigate("/reg")} type="borderless">
+                    Зарегистрироваться
+                  </Button>
                 </div>
               </div>
             </form>
