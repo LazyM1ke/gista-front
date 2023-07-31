@@ -1,3 +1,4 @@
+import getPhoneMaskPattern from "../../../utils/PhoneValidator";
 import Icon from "../../Icon";
 import Typography from "../../Typography";
 import "./TextInput.scss";
@@ -29,6 +30,17 @@ const TextInput = ({
         type={type}
         {...(register ? register(name, options) : {})}
         formNoValidate
+        onChange={
+          type === "tel"
+            ? (event) => {
+                const currentPhoneValue = event.target.value.replaceAll(
+                  /[ \-()]/g,
+                  ""
+                );
+                event.target.value = getPhoneMaskPattern(currentPhoneValue);
+              }
+            : () => null
+        }
       />
       {hintText && (
         <div className="text-input__hint-text">

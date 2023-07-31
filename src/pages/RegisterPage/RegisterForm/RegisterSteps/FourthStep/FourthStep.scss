@@ -15,6 +15,13 @@
     &__item {
       @include flexible($fd: row, $ai: center);
       gap: 8px;
+      color: #A1A1A1;
+      & .active {
+        color: #1EC025;
+        & svg {
+          fill: #1EC025;
+        }
+      }
     }
   }
 }

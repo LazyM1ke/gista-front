@@ -17,11 +17,11 @@ const SecondStep = ({ setStep }: StepProps) => {
     register,
     handleSubmit,
     formState: { errors },
+    getValues,
   } = useForm();
-
   const onSubmit = handleSubmit(async (data) => {
     dispatch(setEmail(data.email));
-    dispatch(setPhone(data.phone));
+    dispatch(setPhone(data.phone.replace(/[^\+\d]/g, "")));
     setStep(3);
   });
 
@@ -31,17 +31,17 @@ const SecondStep = ({ setStep }: StepProps) => {
         <TextInput
           register={register}
           name="phone"
-          type="text"
+          type="tel"
           placeholder="Номер телефона"
           options={{
             required: {
               value: true,
               message: `Поле "Номер телефона" является обязательным`,
             },
-            pattern: {
-              message: "Номер телефона не валиден",
+            minLength: {
               value:
-                /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/,
+                getValues("phone") && getValues("phone")[0] === "+" ? 20 : 19,
+              message: "ошибка!",
             },
           }}
           hintText={errors.phone?.message}

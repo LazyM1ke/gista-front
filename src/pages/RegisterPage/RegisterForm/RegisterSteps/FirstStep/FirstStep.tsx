@@ -9,7 +9,7 @@ import { useAppDispatch } from "../../../../../store/hooks/hooks";
 import { StepProps } from "../../RegisterForm";
 import "./FirstStep.scss";
 import React from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 
 const FirstStep = ({ setStep }: StepProps) => {
   const dispatch = useAppDispatch();
@@ -39,9 +39,13 @@ const FirstStep = ({ setStep }: StepProps) => {
               value: true,
               message: `Поле "Фамилия" является обязательным`,
             },
+            minLength: {
+              value: 2,
+              message: "Должно быть не менее 2 символов",
+            },
             pattern: {
               message: "Фамилия не валидна",
-              value: /^[a-zA-Z\u00C0-\u017F]+(?:\s[a-zA-Z\u00C0-\u017F]+)*$/,
+              value: /^[А-ЯЁ][а-яё]*$/,
             },
           }}
           hintText={errors.last_name?.message}
@@ -56,9 +60,13 @@ const FirstStep = ({ setStep }: StepProps) => {
               value: true,
               message: `Поле "Имя" является обязательным`,
             },
+            minLength: {
+              value: 2,
+              message: "Должно быть не менее 2 символов",
+            },
             pattern: {
               message: "Имя не валидно",
-              value: /^[a-zA-Z\u00C0-\u017F]+(?:\s[a-zA-Z\u00C0-\u017F]+)*$/,
+              value: /^[А-ЯЁ][а-яё]*$/,
             },
           }}
           hintText={errors.first_name?.message}
@@ -71,7 +79,11 @@ const FirstStep = ({ setStep }: StepProps) => {
           options={{
             pattern: {
               message: "Отчество не валидно",
-              value: /^[a-zA-Z\u00C0-\u017F]+(?:\s[a-zA-Z\u00C0-\u017F]+)*$/,
+              value: /^[А-ЯЁ][а-яё]*$/,
+            },
+            minLength: {
+              value: 2,
+              message: "Должно быть не менее 2 символов",
             },
           }}
           hintText={errors.surname?.message}
