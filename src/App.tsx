@@ -16,18 +16,6 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 const App = () => {
   const navigate = useNavigate();
 
-  // const checkAuth = async () => {
-  //   try {
-  //     const response = await axios.get<AuthResponse>(`${API_URL}/token/refresh`, {
-  //       withCredentials: true,
-  //     });
-  //     localStorage.setItem("token", response.data.access);
-  //     navigate('/')
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
   useEffect(() => {
     if (localStorage.getItem("token")) {
       navigate("/");

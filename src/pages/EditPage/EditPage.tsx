@@ -1,3 +1,4 @@
+import Button from "../../UIkit/Button";
 import Icon from "../../UIkit/Icon";
 import TextInput from "../../UIkit/Input/TextInput/TextInput";
 import Modal from "../../UIkit/Modal/Modal";
@@ -15,31 +16,17 @@ import {
 import { useAppDispatch, useAppSelector } from "../../store/hooks/hooks";
 import "./EditPage.scss";
 import React, { useEffect, useState } from "react";
+import { useForm, FieldName, FieldValues } from "react-hook-form";
 import Select from "react-select";
 
-// const mainSections: SelectItem[] = [
-//   {
-//     id: "1",
-//     name: "Бесплатный доступ",
-//     value: "Бесплатный доступ",
-//   },
-//   {
-//     id: "2",
-//     name: "Общая гистология",
-//     value: "Общая гистология",
-//   },
-//   {
-//     id: "3",
-//     name: "Частная гистология",
-//     value: "Частная гистология",
-//   },
-// ];
 interface selectOption {
   value: string;
   label: string;
 }
 
 const EditPage = () => {
+  const { register, handleSubmit, getValues } = useForm();
+
   const dispatch = useAppDispatch();
   const { sections, subsections } = useAppSelector(
     (state) => state.SectionSlice
@@ -71,27 +58,29 @@ const EditPage = () => {
 
   const [isEditPosition, setIsEditPosition] = useState<boolean>(false);
 
-  const handleAddSubSection = () => {
-    SectionService.addSubSection(newSubSectionName, selectedOption?.value).then(
-      (response) => {
-        const { data } = response;
-        dispatch(
-          addSubsection({
-            id: data.id,
-            name: data.name,
-            parent_id: data.parent_id,
-          })
-        );
-        if (data.status === "success") {
-          setSelectedOption(null);
-          setNewSubSectionName("");
-          setAddSectionModalActive(false);
-        } else {
-          alert("Подраздел с таким названием уже существует !");
-        }
+  const onAddSubSection = handleSubmit((data) => {
+    SectionService.addSubSection(
+      data.addSectionName,
+      selectedOption?.value
+    ).then((response) => {
+      const { data } = response;
+      dispatch(
+        addSubsection({
+          id: data.id,
+          name: data.name,
+          parent_id: data.parent_id,
+        })
+      );
+      if (data.status === "success") {
+        setSelectedOption(null);
+        setNewSubSectionName("");
+        setAddSectionModalActive(false);
+      } else {
+        alert("Подраздел с таким названием уже существует !");
       }
-    );
-  };
+    });
+  });
+
   const getSections = () => {
     try {
       SectionService.fetchSections().then((response) => {
@@ -123,25 +112,17 @@ const EditPage = () => {
     setUpdateSectionModalActive(true);
   };
 
-  const handleUpdateSubSectionName = () => {
+  const handleUpdateSubSectionName = handleSubmit((data) => {
     SectionService.updateSubSection(
       editedSubSection?.id,
-      editSubSectionName
+      data.editSectionName
     ).then((response) => {
-      setUpdateSectionModalActive(false);
-      // if (response.data.status === "success") {
-      //   axios
-      //     .get<getSectionsDataResponse>(
-      //       `${import.meta.env.VITE_API_URL}/api/section`
-      //     )
-      //     .then((response) => {
-      //       const { data } = response;
-      //       setSections(data.sections);
-      //       setSubSections(data.subsections);
-      //     });
-      // // }
+      if (response.data.status === "success") {
+        setUpdateSectionModalActive(false);
+        getSections();
+      }
     });
-  };
+  });
 
   return (
     <div className="edit-page">
@@ -205,91 +186,99 @@ const EditPage = () => {
       </div>
       {addGistaModalActive && (
         <Modal
-          mainButtonTitle="Добавить"
           setActive={setAddGistaModalActive}
           title="Добавить препарат"
           active={addGistaModalActive}
         >
-          <TextInput
-            placeholder="Раздел"
-            value={gistaSection}
-            setValue={setGistaSection}
-            type="text"
-          />
-          <TextInput
-            placeholder="Название препарата"
-            value={gistaName}
-            setValue={setGistaName}
-            type="text"
-          />
+          <TextInput placeholder="Раздел" type="text" />
+          <TextInput placeholder="Название препарата" type="text" />
         </Modal>
       )}
       {addSectionModalActive && (
         <Modal
-          mainButtonTitle="Добавить"
           setActive={setAddSectionModalActive}
           title="Добавить раздел"
           active={addSectionModalActive}
-          onAddButton={handleAddSubSection}
         >
-          <Select
-            placeholder="Основной раздел"
-            styles={{
-              control: (baseStyles, state) => ({
-                ...baseStyles,
-                width: "340px",
-                height: "40px",
-                borderStyle: "solid",
-                borderWidth: "1px",
-                borderColor: state.menuIsOpen ? "#007FFF" : "#DEDEDE",
-                borderRadius: "8px",
-                fontFamily: "Lato",
-                fontStyle: "normal",
-                fontWeight: 400,
-                fontSize: "16px",
-                lineHeight: "24px",
-              }),
-              option: (baseStyles, state) => ({
-                cursor: "pointer",
-                fontFamily: "inherit",
-                fontStyle: "normal",
-                fontWeight: 400,
-                fontSize: "16px",
-                lineHeight: "24px",
-                padding: "8px 16px",
-                ":hover": {
-                  ...baseStyles[":hover"],
-                  backgroundColor: "#F2F2F2",
-                },
-              }),
-            }}
-            defaultValue={selectedOption}
-            onChange={setSelectedOption}
-            options={options}
-          />
-          {/*<CustomSelect id="1" name="Основной раздел" data={mainSections} />*/}
-          <TextInput
-            placeholder="Название подраздела"
-            value={newSubSectionName}
-            setValue={setNewSubSectionName}
-            type="text"
-          />
+          <form onSubmit={onAddSubSection} className="modal__form">
+            <Select
+              placeholder="Основной раздел"
+              styles={{
+                control: (baseStyles, state) => ({
+                  ...baseStyles,
+                  width: "340px",
+                  height: "40px",
+                  borderStyle: "solid",
+                  borderWidth: "1px",
+                  borderColor: state.menuIsOpen ? "#007FFF" : "#DEDEDE",
+                  borderRadius: "8px",
+                  fontFamily: "Lato",
+                  fontStyle: "normal",
+                  fontWeight: 400,
+                  fontSize: "16px",
+                  lineHeight: "24px",
+                }),
+                option: (baseStyles, state) => ({
+                  cursor: "pointer",
+                  fontFamily: "inherit",
+                  fontStyle: "normal",
+                  fontWeight: 400,
+                  fontSize: "16px",
+                  lineHeight: "24px",
+                  padding: "8px 16px",
+                  ":hover": {
+                    ...baseStyles[":hover"],
+                    backgroundColor: "#F2F2F2",
+                  },
+                }),
+              }}
+              defaultValue={selectedOption}
+              onChange={setSelectedOption}
+              options={options}
+            />
+            <TextInput
+              placeholder="Название подраздела"
+              register={register}
+              options={{ required: true, value: "" }}
+              name="addSectionName"
+              type="text"
+            />
+            <div className="modal__btns">
+              <Button as={"submit"}>Добавить</Button>
+              <Button
+                onClick={() => setAddSectionModalActive(false)}
+                type="borderless"
+              >
+                Отмена
+              </Button>
+            </div>
+          </form>
         </Modal>
       )}
       {updateSectionModalActive && (
         <Modal
-          onAddButton={handleUpdateSubSectionName}
-          mainButtonTitle="Сохранить"
           setActive={setUpdateSectionModalActive}
           title="Изменить название подраздела"
           active={updateSectionModalActive}
         >
-          <TextInput
-            placeholder="Название подраздела"
-            value={editSubSectionName}
-            setValue={setEditSubSectionName}
-            type="text"
-          />
+          <form onSubmit={handleUpdateSubSectionName}>
+            <TextInput
+              name="editSectionName"
+              placeholder="Название подраздела"
+              register={register}
+              options={{ required: true, value: editedSubSection?.name }}
+              type="text"
+            />
+            <div className="modal__btns">
+              <Button as={"submit"}>Изменить</Button>
+              <Button
+                onClick={() => setUpdateSectionModalActive(false)}
+                type="borderless"
+              >
+                Отмена
+              </Button>
+            </div>
+          </form>
         </Modal>
       )}
     </div>

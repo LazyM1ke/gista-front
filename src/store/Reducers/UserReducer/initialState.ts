@@ -1,20 +1,16 @@
-
 interface UserState {
-    name: string
-    surname: string
-    patronymic: string
-
-    phone: string
-    email: string
-    password: string
+  first_name: string;
+  surname: string;
+  last_name: string;
+  phone: string;
+  email: string;
 }
 const initialState: UserState = {
-    name: '',
-    email: '',
-    password: "",
-    patronymic: "",
-    phone: "",
-    surname: "",
-}
+  first_name: "",
+  email: "",
+  last_name: "",
+  phone: "",
+  surname: "",
+};
 
-export default initialState
+export default initialState;

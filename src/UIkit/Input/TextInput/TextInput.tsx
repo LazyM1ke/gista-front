@@ -1,33 +1,22 @@
+import getPhoneMaskPattern from "../../../utils/PhoneValidator";
+import Icon from "../../Icon";
 import Typography from "../../Typography";
 import "./TextInput.scss";
 import TextInputProps from "./TextInputProps.types";
 import classNames from "classnames";
-import React, { ChangeEvent, useCallback } from "react";
+import React from "react";
 
 const TextInput = ({
   className,
-  value,
-  setValue,
   placeholder,
   label,
   hintText,
   type = "text",
   register,
   name = "",
+  options,
 }: TextInputProps) => {
-  const TextInputClassName = classNames(
-    "text-input",
-
-    className
-  );
-  const onChangeHandler = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      if (setValue) {
-        setValue(event.target.value);
-      }
-    },
-    [setValue]
-  );
+  const TextInputClassName = classNames("text-input", className);
   return (
     <div className={TextInputClassName}>
       {label && (
@@ -36,20 +25,34 @@ const TextInput = ({
         </Typography>
       )}
       <input
-        {...(register ? register(name) : {})}
-        onChange={onChangeHandler}
+        style={hintText ? { border: "1px solid #E32727" } : {}}
         placeholder={placeholder}
-        value={value}
         type={type}
+        {...(register ? register(name, options) : {})}
+        formNoValidate
+        onChange={
+          type === "tel"
+            ? (event) => {
+                const currentPhoneValue = event.target.value.replaceAll(
+                  /[ \-()]/g,
+                  ""
+                );
+                event.target.value = getPhoneMaskPattern(currentPhoneValue);
+              }
+            : () => null
+        }
       />
       {hintText && (
-        <Typography
-          className="text-input__hint-text"
-          variant="text-14"
-          color="#E32727"
-        >
-          {hintText}
-        </Typography>
+        <div className="text-input__hint-text">
+          <Icon size={16} iconName="infocircle" color="#E32727" />
+          <Typography
+            className="text-input__hint-text"
+            variant="text-14"
+            color="#E32727"
+          >
+            {hintText.toString()}
+          </Typography>
+        </div>
       )}
     </div>
   );

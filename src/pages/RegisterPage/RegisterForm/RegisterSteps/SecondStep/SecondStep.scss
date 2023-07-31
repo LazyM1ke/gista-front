@@ -1,6 +1,11 @@
 @import "src/assets/styles/main";
 
 .second-step {
-  @include flexible($fd: column, $gap: 16px);
   width: 100%;
+  @include flexible($fd: column, $gap: 32px);
+  &__inputs {
+    @include flexible($fd: column, $gap: 16px);
+    width: 100%;
+
+  }
 }

@@ -1,9 +1,9 @@
-import { ColorNames } from "../../assets/styles/colors/export.scss";
 import { TypographyVariants } from "../../assets/styles/typography/export.scss";
+import { ReactNode } from "react";
 
 interface TypographyProps {
   className?: string;
-  children?: React.ReactNode;
+  children?: ReactNode | undefined;
   color?: string;
   variant?: TypographyVariants;
 }

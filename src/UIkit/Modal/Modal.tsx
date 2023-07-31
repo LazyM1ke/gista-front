@@ -5,15 +5,7 @@ import "./Modal.scss";
 import ModalProps from "./ModalProps.types";
 import React from "react";
 
-const Modal = ({
-  active,
-  children,
-  title,
-  setActive,
-  onAddButton,
-  onCancelButton,
-  mainButtonTitle,
-}: ModalProps) => {
+const Modal = ({ active, children, title, setActive }: ModalProps) => {
   return (
     <div className={active ? "modal active" : "modal"}>
       <div
@@ -32,12 +24,12 @@ const Modal = ({
             {title}
           </Typography>
           {children}
-          <div className="modal__btns">
-            <Button onClick={onAddButton}>{mainButtonTitle}</Button>
-            <Button onClick={onCancelButton} type="borderless">
-              Отмена
-            </Button>
-          </div>
+          {/*<div className="modal__btns">*/}
+          {/*  <Button as={"submit"}>{mainButtonTitle}</Button>*/}
+          {/*  <Button onClick={onCancelButton} type="borderless">*/}
+          {/*    Отмена*/}
+          {/*  </Button>*/}
+          {/*</div>*/}
         </div>
       </div>
     </div>

@@ -5,54 +5,46 @@ import MacImage from "../../assets/images/imac.png";
 import Header from "../../components/Header/Header";
 import AuthService from "../../services/AuthService";
 import "./AuthPage.scss";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { atom, useSetRecoilState } from "recoil";
-
-export interface User {
-  access: string;
-  isStaff: boolean;
-  isLogged: boolean;
-}
-
-export const userState = atom<User>({
-  key: "user",
-  default: {
-    isLogged: false,
-    access: "",
-    isStaff: false,
-  },
-});
 
 const AuthPage = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const navigate = useNavigate();
-  const setUserState = useSetRecoilState(userState);
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
   const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>("");
 
   useEffect(() => {
     setScreenWidth(window.innerWidth);
   }, [screenWidth]);
 
-  const handleAuth = async () => {
-    setErrorMessage(null);
-
-    const response = await AuthService.login(username, password);
-    if (!response.data.success) {
-      response.data.message && setErrorMessage(response.data.message);
+  const onSubmit = handleSubmit(async (data) => {
+    try {
+      const response = await AuthService.login(data.username, data.password);
+      if (!response.data.success) {
+        response.data.message && setErrorMessage(response.data.message);
+      }
+      if (response.data.success) {
+        localStorage.setItem("token", response.data.access);
+        navigate("/");
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          setErrorMessage(error.response.data.message);
+        }
+      } else {
+        console.error(error);
+      }
     }
-    if (response.data.success) {
-      localStorage.setItem("token", response.data.access);
-      setUserState({
-        access: response.data.access,
-        isStaff: response.data.is_staff,
-        isLogged: true,
-      });
-      navigate("/");
-    }
-  };
+  });
 
   if (screenWidth <= 550) {
     return (
@@ -60,7 +52,7 @@ const AuthPage = () => {
         <Header />
         <div className="auth-page">
           <div className="auth-page__content">
-            <form className="auth-page__form">
+            <form onSubmit={onSubmit} className="auth-page__form">
               <Typography
                 className="auth-page__form__title"
                 variant="headline-h2"
@@ -69,19 +61,19 @@ const AuthPage = () => {
               </Typography>
               <div className="auth-page__form__inputs">
                 <TextInput
+                  name="username"
+                  register={register}
                   type="text"
                   className="auth-page__form__input"
-                  value={username}
-                  setValue={setUsername}
                   placeholder="Имя пользователя"
                 />
                 <TextInput
+                  name="password"
+                  register={register}
                   type="password"
                   className="auth-page__form__input"
-                  value={password}
-                  setValue={setPassword}
                   placeholder="Пароль"
-                  hintText={errorMessage}
+                  // hintText={errorMessage}
                 />
                 <Typography
                   className="auth-page__form__forgot"
@@ -91,17 +83,19 @@ const AuthPage = () => {
                   Забыли пароль?
                 </Typography>
               </div>
+              <div className="auth-page__form__submit">
+                <Button
+                  as={"submit"}
+                  className="auth-page__form__submit-btn"
+                  size="large"
+                  fullWidth
+                  type="invert"
+                >
+                  Войти
+                </Button>
+              </div>
             </form>
             <div className="auth-page__form__submit">
-              <Button
-                className="auth-page__form__submit-btn"
-                size="large"
-                fullWidth
-                type="invert"
-                onClick={handleAuth}
-              >
-                Войти
-              </Button>
               <div className="auth-page__form__register">
                 <Typography color="#FFFFFF">Нет аккаунта?</Typography>
                 <Button
@@ -151,7 +145,7 @@ const AuthPage = () => {
           </div>
 
           <div className="auth-page__form__wrapper">
-            <form className="auth-page__form">
+            <form onSubmit={onSubmit} className="auth-page__form">
               <Typography
                 className="auth-page__form__title"
                 variant="headline-h2"
@@ -162,29 +156,48 @@ const AuthPage = () => {
                 <TextInput
                   type="text"
                   className="auth-page__form__input"
-                  value={username}
-                  setValue={setUsername}
+                  name="username"
+                  register={register}
+                  options={{
+                    required: {
+                      value: true,
+                      message: `Поле "Имя пользователя" является обязательным`,
+                    },
+                  }}
                   placeholder="Имя пользователя"
+                  hintText={errors.username?.message}
                 />
                 <TextInput
                   type="password"
                   className="auth-page__form__input"
-                  value={password}
-                  setValue={setPassword}
+                  name="password"
+                  register={register}
+                  options={{
+                    required: {
+                      value: true,
+                      message: `Поле "Пароль" является обязательным`,
+                    },
+                  }}
                   placeholder="Пароль"
-                  hintText={errorMessage}
+                  hintText={
+                    errors.password?.message
+                      ? errors.password?.message
+                      : errorMessage
+                  }
                 />
               </div>
               <Typography variant="text-14" color="#007FFF">
                 Забыли пароль?
               </Typography>
               <div className="auth-page__form__submit">
-                <Button size="large" fullWidth onClick={handleAuth}>
+                <Button as={"submit"} size="large" fullWidth>
                   Войти
                 </Button>
                 <div className="auth-page__form__register">
                   <Typography color="#787878">Нет аккаунта?</Typography>
-                  <Typography color="#007FFF">Зарегистрироваться</Typography>
+                  <Button onClick={() => navigate("/reg")} type="borderless">
+                    Зарегистрироваться
+                  </Button>
                 </div>
               </div>
             </form>
